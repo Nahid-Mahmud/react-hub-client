@@ -19,6 +19,7 @@ import IconMenuItem from "./IconMenuItem";
 import SearchIcon from "@mui/icons-material/Search";
 import { Grid } from "@mui/material";
 import SearchBox from "../Components/SearchBox/SearchBox";
+import { Link } from "react-router-dom";
 
 // const pages = ["Products", "Pricing", "Blog"];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -69,23 +70,24 @@ const NavBar = () => {
               }}
               src="https://i.ibb.co/sVkbSW9/React-Hub-Logo.png"
             />
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="#app-bar-with-responsive-menu"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              ReactHub
-            </Typography>
+            <Link to={"/"} style={{ textDecoration: "none", color: "white" }}>
+              <Typography
+                variant="h6"
+                noWrap
+                component="a"
+                sx={{
+                  mr: 2,
+                  display: { xs: "none", md: "flex" },
+                  fontFamily: "monospace",
+                  fontWeight: 700,
+                  letterSpacing: ".3rem",
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              >
+                ReactHub
+              </Typography>
+            </Link>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton

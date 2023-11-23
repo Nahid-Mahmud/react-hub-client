@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const IconMenuItem = ({ pathName, itemName, handleCloseUserMenu }) => {
   return (
-    <NavLink to={pathName}>
+    <NavLink style={{textDecoration:'none'}} to={pathName}>
       <MenuItem onClick={handleCloseUserMenu}>
         <Typography sx={{ color: "black" }} textAlign="center">
           {" "}
