@@ -7,22 +7,29 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
+// import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
+// import AdbIcon from "@mui/icons-material/Adb";
 import NavItem from "./NavItem";
 import NavItemMobile from "./NavItemMobile";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import IconMenuItem from "./IconMenuItem";
+import SearchIcon from "@mui/icons-material/Search";
+import { Grid } from "@mui/material";
+import SearchBox from "../Components/SearchBox/SearchBox";
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+// const pages = ["Products", "Pricing", "Blog"];
+// const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  // search bar state management
+
+  const [search, setSearch] = React.useState("");
 
   // navbar menu state management
 
@@ -42,6 +49,10 @@ const NavBar = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleSearch = () => {
+    console.log(search);
   };
 
   return (
@@ -122,7 +133,7 @@ const NavBar = () => {
 
                 <NavItemMobile
                   itemName={"Membership"}
-                  pathName={"/Membership"}
+                  pathName={"/membership"}
                   handleCloseNavMenu={handleCloseNavMenu}
                 />
                 <NavItemMobile
@@ -162,7 +173,7 @@ const NavBar = () => {
 
               <NavItem
                 itemName={"Membership"}
-                pathName={"/Membership"}
+                pathName={"/membership"}
                 handleCloseNavMenu={handleCloseNavMenu}
               />
               {/* Hide on User Available */}
@@ -172,8 +183,9 @@ const NavBar = () => {
                 pathName={"/login"}
                 handleCloseNavMenu={handleCloseNavMenu}
               />
-            </Box>
 
+              <SearchBox />
+            </Box>
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -218,8 +230,6 @@ const NavBar = () => {
                   <Button sx={{ color: "black" }}>LogOut</Button>
                 </MenuItem>
               </Menu>
-
-              {/* search bar */}
             </Box>
           </Toolbar>
         </Container>
