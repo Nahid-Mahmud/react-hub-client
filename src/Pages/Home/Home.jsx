@@ -5,6 +5,7 @@ import Banner from "./Banner";
 import PopularTags from "./PopularTags";
 import { useState } from "react";
 import Announcements from "./Announcements";
+import AllPosts from "./AllPosts";
 
 const Home = () => {
   const [search, setSearch] = useState("");
@@ -25,14 +26,13 @@ const Home = () => {
         handleSearch={handleSearch}
       />
       <PopularTags />
-      <Announcements/>
+      <Announcements />
+      <AllPosts />
     </>
   );
 };
 
 export default Home;
-
-
 
 // https://i.ibb.co/Xj8LzGY/profile1.jpg
 // https://i.ibb.co/9hRxjnS/profile2.jpg

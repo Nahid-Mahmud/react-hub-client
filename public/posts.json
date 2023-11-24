@@ -1,0 +1,112 @@
+[
+  {
+    "authorName": "John Doe",
+    "authorPicture": "https://i.ibb.co/yQX8L5H/profile3.jpg",
+    "postTitle": "Mastering React Hooks: A Comprehensive Guide",
+    "tags": "reacthooks",
+    "description": "In this guide, we delve into the intricacies of React Hooks, exploring best practices and common pitfalls. Learn how to leverage the power of hooks to build scalable and maintainable React applications.",
+    "time": "11/25/2023",
+    "commentsCount": 15,
+    "upVoteCount": 120,
+    "downVoteCount": 5
+  },
+  {
+    "authorName": "Jane Smith",
+    "authorPicture": "https://i.ibb.co/9hRxjnS/profile2.jpg",
+    "postTitle": "The Art of JavaScript Design Patterns",
+    "tags": "javascript",
+    "description": "Discover the artistry behind JavaScript design patterns and how they can enhance the structure and maintainability of your code. This comprehensive overview includes real-world examples and practical insights.",
+    "time": "11/24/2023",
+    "commentsCount": 30,
+    "upVoteCount": 90,
+    "downVoteCount": 2
+  },
+  {
+    "authorName": "Sam Johnson",
+    "authorPicture": "https://i.ibb.co/yQX8L5H/profile3.jpg",
+    "postTitle": "Building Scalable React Applications",
+    "tags": "reactjs",
+    "description": "Join us on a journey through the principles of building scalable React applications. From component architecture to state management, this post covers essential techniques for modern React development.",
+    "time": "11/23/2023",
+    "commentsCount": 25,
+    "upVoteCount": 80,
+    "downVoteCount": 8
+  },
+  {
+    "authorName": "Alex Carter",
+    "authorPicture": "https://i.ibb.co/9hRxjnS/profile2.jpg",
+    "postTitle": "JavaScript Best Practices for Modern Development",
+    "tags": "javascript",
+    "description": "Stay on top of modern JavaScript development with these best practices. From ES6 features to code organization tips, this post provides actionable advice for writing clean and efficient JavaScript code.",
+    "time": "11/22/2023",
+    "commentsCount": 20,
+    "upVoteCount": 60,
+    "downVoteCount": 3
+  },
+  {
+    "authorName": "Emily White",
+    "authorPicture": "https://i.ibb.co/Xj8LzGY/profile1.jpg",
+    "postTitle": "ReactJS: A Journey into Component Architecture",
+    "tags": "reactjs",
+    "description": "Embark on a journey into the heart of React component architecture. This post explores the key principles and patterns that make React a powerful library for building user interfaces.",
+    "time": "11/21/2023",
+    "commentsCount": 18,
+    "upVoteCount": 75,
+    "downVoteCount": 4
+  },
+  {
+    "authorName": "Jane Smith",
+    "authorPicture": "https://i.ibb.co/9hRxjnS/profile2.jpg",
+    "postTitle": "Optimizing React Hooks for Performance",
+    "tags": "reacthooks",
+    "description": "Optimize the performance of your React Hooks with these practical tips. From memoization to lazy loading, learn how to make your React applications faster and more efficient.",
+    "time": "11/20/2023",
+    "commentsCount": 22,
+    "upVoteCount": 100,
+    "downVoteCount": 6
+  },
+  {
+    "authorName": "John Doe",
+    "authorPicture": "https://i.ibb.co/yQX8L5H/profile3.jpg",
+    "postTitle": "JavaScript ES6: The Modern Developer's Toolkit",
+    "tags": "javascript",
+    "description": "Explore the essential features of JavaScript ES6 and how they can supercharge your development workflow. From arrow functions to destructuring, this post covers it all.",
+    "time": "11/19/2023",
+    "commentsCount": 12,
+    "upVoteCount": 50,
+    "downVoteCount": 1
+  },
+  {
+    "authorName": "Alex Carter",
+    "authorPicture": "https://i.ibb.co/Xj8LzGY/profile1.jpg",
+    "postTitle": "Advanced React Hooks: State and Beyond",
+    "tags": "reacthooks",
+    "description": "Take your React Hooks skills to the next level with advanced state management techniques. This post covers complex use cases and strategies for handling state in your React applications.",
+    "time": "11/18/2023",
+    "commentsCount": 28,
+    "upVoteCount": 85,
+    "downVoteCount": 7
+  },
+  {
+    "authorName": "Jane Smith",
+    "authorPicture": "https://i.ibb.co/9hRxjnS/profile2.jpg",
+    "postTitle": "Modern JavaScript: Exploring ECMAScript 2022",
+    "tags": "javascript",
+    "description": "Stay up-to-date with the latest features in modern JavaScript. This post explores the additions and improvements introduced in ECMAScript 2022, providing insights for modern developers.",
+    "time": "11/17/2023",
+    "commentsCount": 35,
+    "upVoteCount": 110,
+    "downVoteCount": 9
+  },
+  {
+    "authorName": "Nathan Green",
+    "authorPicture": "https://example.com/nathan_green.jpg",
+    "postTitle": "Effective React Component Design with Hooks",
+    "tags": "reacthooks",
+    "description": "Learn effective strategies for designing React components using hooks. This post covers best practices, tips for reusability, and common patterns to elevate your React development skills.",
+    "time": "11/16/2023",
+    "commentsCount": 24,
+    "upVoteCount": 70,
+    "downVoteCount": 5
+  }
+]

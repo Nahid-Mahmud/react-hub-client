@@ -74,6 +74,8 @@ const NavBar = () => {
       });
   };
 
+  // console.log(new Date().toLocaleDateString());
+
   return (
     <>
       <AppBar position="static">

@@ -1,11 +1,10 @@
-import React from "react";
 import useAxiosPublic from "./useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
 const useAnnouncements = () => {
   const axiosPublic = useAxiosPublic();
   const {
-    data: announcementsData,
+    data: announcementsData=[],
     isLoading: isAnnounceMentLoading,
     refetch: announcementRefetch,
   } = useQuery({
@@ -19,3 +18,10 @@ const useAnnouncements = () => {
 };
 
 export default useAnnouncements;
+
+
+
+
+// https://i.ibb.co/Xj8LzGY/profile1.jpg
+// https://i.ibb.co/9hRxjnS/profile2.jpg
+// https://i.ibb.co/yQX8L5H/profile3.jpg
