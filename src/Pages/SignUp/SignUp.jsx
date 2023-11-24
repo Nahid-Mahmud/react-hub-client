@@ -1,10 +1,69 @@
 import { Helmet } from "react-helmet-async";
 import GoogleLogin from "../../Shared/GoogleLogin";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useAuth } from "../../Hooks/useAuth";
+import { updateProfile } from "firebase/auth";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
-  const [signInUpErr, setSignInUpErr] = useState('');
+  const { emailPassSignup } = useAuth();
+  const navigate = useNavigate();
+  // console.log(emailPassSignup);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+  const [signInUpErr, setSignInUpErr] = useState("");
+
+  // handle on submint
+
+  const onSubmit = (formData) => {
+    const name = formData.name;
+    const email = formData.email;
+    const password = formData.password;
+    const photourl = formData.photourl;
+    const badge = "bronze";
+
+    // email bassword login
+    emailPassSignup(email, password)
+      .then((result) => {
+        const currentUser = result.user;
+        updateProfile(currentUser, {
+          displayName: name,
+          photoURL: photourl,
+        })
+          .then(() => {
+            // console.log("User Updated", currentUser);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        if (currentUser) {
+          toast(" Sign Up Successfull", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          navigate("/");
+          //   e.target.reset();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setSignInUpErr(err.message);
+      });
+
+    console.log(name, email, password, photourl, badge);
+  };
 
   return (
     <div className="hero min-h-screen bg-gradient-to-r from-blue-500 to-blue-900">
@@ -12,6 +71,7 @@ const SignUp = () => {
         <div className="bg-white bg-opacity-50 shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <form
             // onSubmit={handleForm}
+            onSubmit={handleSubmit(onSubmit)}
             className="pb-6"
           >
             <p className="text-center  text-3xl font-semibold underline py-5">
@@ -22,47 +82,63 @@ const SignUp = () => {
                 Your Full Name
               </label>
               <input
+                {...register("name", { required: true })}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="username"
                 type="text"
                 name="name"
                 placeholder="Jhon Doe"
               />
+              {errors.name && (
+                <span className="text-red-600">Name is required</span>
+              )}
             </div>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Image Url
               </label>
               <input
+                {...register("photourl", { required: true })}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="photourl"
                 type="text"
                 name="photourl"
                 placeholder="https://example.png"
               />
+              {errors.photoURL && (
+                <span className="text-red-600">Photo URL is required</span>
+              )}
             </div>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Email
               </label>
               <input
+                {...register("email", { required: true })}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="email"
                 type="email"
                 name="email"
                 placeholder="example@gmail.com"
               />
+              {errors.email && (
+                <span className="text-red-600">Email is required</span>
+              )}
             </div>
             <div className="mb-6">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Password
               </label>
               <input
+                {...register("password", { required: true })}
                 className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 id="password"
                 type="password"
                 placeholder="******************"
               />
+              {errors.password && (
+                <span className="text-red-600">Password is required</span>
+              )}
               <p className="text-red-500 text-xs italic">
                 {/* {userSignUpError} */}
                 {signInUpErr}
