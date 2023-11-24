@@ -7,9 +7,9 @@ const MainLayout = () => {
   return (
     <div>
       <NavBar />
-      <Container maxWidth="xl">
-        <Outlet />
-      </Container>
+
+      <Outlet />
+
       <Footer />
     </div>
   );
