@@ -1,7 +1,7 @@
 import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../Hooks/useAuth";
 
-const GoogleLogin = ({ text }) => {
+const GoogleLogin = ({ text, setSignInUpErr }) => {
   const { googleLogIn } = useAuth();
   const handleGoogleLogin = () => {
     googleLogIn()
@@ -10,6 +10,7 @@ const GoogleLogin = ({ text }) => {
       })
       .catch((err) => {
         console.log(err.message);
+        setSignInUpErr(err.message);
       });
   };
   return (

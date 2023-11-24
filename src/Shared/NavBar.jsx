@@ -150,11 +150,17 @@ const NavBar = () => {
                   pathName={"/membership"}
                   handleCloseNavMenu={handleCloseNavMenu}
                 />
-                <NavItemMobile
-                  itemName={"Join Us"}
-                  pathName={"/login"}
-                  handleCloseNavMenu={handleCloseNavMenu}
-                />
+
+                {user ? (
+                  ""
+                ) : (
+                  <NavItemMobile
+                    itemName={"Join Us"}
+                    pathName={"/login"}
+                    handleCloseNavMenu={handleCloseNavMenu}
+                  />
+                )}
+
                 {/* <SearchBox handleSearch={handleSearch} setSearch={setSearch} /> */}
               </Menu>
             </Box>
@@ -197,12 +203,15 @@ const NavBar = () => {
               </Button>
 
               {/* Hide on User Available */}
-
-              <NavItem
-                itemName={"Join Us"}
-                pathName={"/login"}
-                handleCloseNavMenu={handleCloseNavMenu}
-              />
+              {user ? (
+                ""
+              ) : (
+                <NavItem
+                  itemName={"Join Us"}
+                  pathName={"/login"}
+                  handleCloseNavMenu={handleCloseNavMenu}
+                />
+              )}
 
               {/* Search Box */}
 

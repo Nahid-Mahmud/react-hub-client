@@ -1,8 +1,11 @@
 import { Helmet } from "react-helmet-async";
 import GoogleLogin from "../../Shared/GoogleLogin";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const SignUp = () => {
+  const [signInUpErr, setSignInUpErr] = useState('');
+
   return (
     <div className="hero min-h-screen bg-gradient-to-r from-blue-500 to-blue-900">
       <div className="w-full  max-w-md ">
@@ -62,6 +65,7 @@ const SignUp = () => {
               />
               <p className="text-red-500 text-xs italic">
                 {/* {userSignUpError} */}
+                {signInUpErr}
               </p>
             </div>
             <div className="flex items-center gap-3 justify-between">
@@ -90,7 +94,10 @@ const SignUp = () => {
               //   onClick={handleGoogleLogin}
               className="text-center py-7 "
             >
-              <GoogleLogin text="Sign Up With Google "></GoogleLogin>
+              <GoogleLogin
+                setSignInUpErr={setSignInUpErr}
+                text="Sign Up With Google "
+              ></GoogleLogin>
             </div>
             <Link to={"/"}>
               <button className="btn bg-green-600 hover:bg-green-700 text-white  hover:text-black">
