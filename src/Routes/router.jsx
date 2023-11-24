@@ -14,6 +14,10 @@ const router = createBrowserRouter([
         element: <Home />,
         index: true,
       },
+      {
+        path: "membership",
+        element: <div> Membership is comming soon </div>,
+      },
     ],
   },
   {
@@ -23,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUp />,
+  },
+  {
+    path: "/dashboard",
+    element: <div> Dashboard Is commitn soon </div>,
   },
 ]);
 

@@ -4,7 +4,7 @@ import Loader from "../../Shared/Loader";
 const Announcements = () => {
   const [announcementsData, isAnnounceMentLoading, announcementRefetch] =
     useAnnouncements();
-  console.log(announcementsData);
+  // console.log(announcementsData);
   if (isAnnounceMentLoading) {
     return <Loader />;
   }
