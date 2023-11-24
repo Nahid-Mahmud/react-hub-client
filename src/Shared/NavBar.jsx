@@ -22,8 +22,10 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useAuth } from "../Hooks/useAuth";
+import { Badge } from "@mui/material";
 // const pages = ["Products", "Pricing", "Blog"];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
+import MailIcon from "@mui/icons-material/Mail";
 
 const NavBar = () => {
   const { user, signoutUser } = useAuth();
@@ -198,8 +200,11 @@ const NavBar = () => {
               />
 
               {/* Icon Here */}
+              {/* Badge count will be dinamic  */}
               <Button>
-                <NotificationsIcon sx={{ color: "white" }} />
+                <Badge badgeContent={4} color="primary">
+                  <MailIcon sx={{color:'white'}} color="action" />
+                </Badge>
               </Button>
 
               {/* Hide on User Available */}
