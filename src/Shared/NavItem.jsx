@@ -3,7 +3,17 @@ import { NavLink } from "react-router-dom";
 
 const NavItem = ({ itemName, pathName, handleCloseNavMenu }) => {
   return (
-    <NavLink style={{ textDecoration: "none" }} to={pathName}>
+    <NavLink
+      className={({ isActive, isPending }) =>
+        isPending
+          ? "pending"
+          : isActive
+          ? "border-b-2  border-orange-300 text-orange-300"
+          : ""
+      }
+      style={{ textDecoration: "none" }}
+      to={pathName}
+    >
       <Button
         onClick={handleCloseNavMenu}
         sx={{ my: 2, color: "white", display: "block" }}

@@ -1,4 +1,3 @@
-
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -18,10 +17,10 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import IconMenuItem from "./IconMenuItem";
 // import SearchIcon from "@mui/icons-material/Search";
 // import { Grid } from "@mui/material";
-import SearchBox from "../Components/SearchBox/SearchBox";
+// import SearchBox from "../Components/SearchBox/SearchBox";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-
+import NotificationsIcon from "@mui/icons-material/Notifications";
 // const pages = ["Products", "Pricing", "Blog"];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -30,10 +29,10 @@ const NavBar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   // search bar state management
-  const [search, setSearch] = useState("");
-  const handleSearch = () => {
-    console.log(search.label);
-  };
+  // const [search, setSearch] = useState("");
+  // const handleSearch = () => {
+  //   console.log(search.label);
+  // };
 
   // navbar menu state management
 
@@ -142,7 +141,7 @@ const NavBar = () => {
                   pathName={"/login"}
                   handleCloseNavMenu={handleCloseNavMenu}
                 />
-               <SearchBox handleSearch={handleSearch} setSearch={setSearch} />
+                {/* <SearchBox handleSearch={handleSearch} setSearch={setSearch} /> */}
               </Menu>
             </Box>
             {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
@@ -177,6 +176,12 @@ const NavBar = () => {
                 pathName={"/membership"}
                 handleCloseNavMenu={handleCloseNavMenu}
               />
+
+              {/* Icon Here */}
+              <Button> 
+              <NotificationsIcon sx={{color:"white"}} />
+              </Button>
+
               {/* Hide on User Available */}
 
               <NavItem
@@ -187,7 +192,7 @@ const NavBar = () => {
 
               {/* Search Box */}
 
-              <SearchBox handleSearch={handleSearch} setSearch={setSearch} />
+              {/* <SearchBox handleSearch={handleSearch} setSearch={setSearch} /> */}
             </Box>
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
