@@ -2,15 +2,40 @@ import { Link } from "react-router-dom";
 import GoogleLogin from "../../Shared/GoogleLogin";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
+import { useAuth } from "../../Hooks/useAuth";
+import { useForm } from "react-hook-form";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../Provider/AuthProvider";
 
 const LogIn = () => {
+  const {
+    register,
+    handleSubmit,
+    // reset,
+    formState: { errors },
+  } = useForm();
   const [signInUpErr, setSignInUpErr] = useState("");
+  const { emailPassLogin } = useAuth();
+  console.log(emailPassLogin);
+
+  const onSubmit = (formData) => {
+    setSignInUpErr("");
+    console.log(formData);
+    signInWithEmailAndPassword(auth, formData.email, formData.password)
+      .then((res) => {
+        console.log("signupsuccess", res.user);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setSignInUpErr(err.message);
+      });
+  };
 
   return (
     <div className="hero min-h-screen bg-gradient-to-r from-blue-500 to-blue-900">
       <div className="w-full  max-w-md ">
         <div className="bg-white bg-opacity-50 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <form className="pb-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="pb-6">
             <p className="text-center text-black text-3xl font-semibold underline  py-5">
               Join Us
             </p>
@@ -19,25 +44,34 @@ const LogIn = () => {
                 Email
               </label>
               <input
+                {...register("email", { required: true })}
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="email"
                 type="email"
                 name="email"
                 placeholder="example@gmail.com"
               />
+              {errors.email && (
+                <span className="text-red-600">Email is required</span>
+              )}
             </div>
             <div className="mb-6">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Password
               </label>
               <input
+                {...register("password", { required: true })}
                 className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                 id="password"
                 type="password"
                 placeholder="******************"
               />
+              {errors.password && (
+                <span className="text-red-600">Password is required</span>
+              )}
               <p className="text-red-500 text-xs italic">
                 {/* {signInError} */}
+
                 {signInUpErr}
               </p>
             </div>

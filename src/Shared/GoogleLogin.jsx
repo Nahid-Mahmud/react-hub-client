@@ -1,12 +1,31 @@
 import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../Hooks/useAuth";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { useNavigate } from "react-router-dom";
 
 const GoogleLogin = ({ text, setSignInUpErr }) => {
+  const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
   const { googleLogIn } = useAuth();
   const handleGoogleLogin = () => {
+    setSignInUpErr("");
     googleLogIn()
       .then((result) => {
         // console.log(result.user);
+        const badge = "bronze";
+        const userInfo = {
+          email: result.user?.email,
+          name: result.user?.displayName,
+          badge,
+          role: "user",
+        };
+        axiosPublic.post("/users", userInfo).then((res) => {
+          console.log(res.data);
+          if (res.data.insertedId > 0) {
+            console.log("user created successfully");
+          }
+          navigate("/");
+        });
       })
       .catch((err) => {
         console.log(err.message);

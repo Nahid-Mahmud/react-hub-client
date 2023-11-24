@@ -6,15 +6,20 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "../../Hooks/useAuth";
 import { updateProfile } from "firebase/auth";
 import { toast } from "react-toastify";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const { emailPassSignup } = useAuth();
   const navigate = useNavigate();
   // console.log(emailPassSignup);
+  // axios public request
+  const axiosPublic = useAxiosPublic();
+  // react hook form
   const {
     register,
     handleSubmit,
-    reset,
+    // reset,
     formState: { errors },
   } = useForm();
   const [signInUpErr, setSignInUpErr] = useState("");
@@ -38,6 +43,25 @@ const SignUp = () => {
         })
           .then(() => {
             // console.log("User Updated", currentUser);
+            // post user in database
+            const userInfo = {
+              name,
+              email,
+              badge,
+              role: "user",
+            };
+            axiosPublic.post("/users", userInfo).then((res) => {
+              if (res.data.insertedId > 0) {
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "User created successfully.",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate("/");
+              }
+            });
           })
           .catch((err) => {
             console.log(err);
