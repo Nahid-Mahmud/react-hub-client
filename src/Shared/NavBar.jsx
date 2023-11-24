@@ -21,10 +21,12 @@ import IconMenuItem from "./IconMenuItem";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import { useAuth } from "../Hooks/useAuth";
 // const pages = ["Products", "Pricing", "Blog"];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const NavBar = () => {
+  const { user, signoutUser } = useAuth();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -52,6 +54,18 @@ const NavBar = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  // logout function
+  const handleLogout = () => {
+    console.log("logout");
+    signoutUser()
+      .then(() => {
+        console.log("signout user successfully");
+      })
+      .catch((err) => {
+        console.log("signout user error", err.message);
+      });
   };
 
   return (
@@ -178,8 +192,8 @@ const NavBar = () => {
               />
 
               {/* Icon Here */}
-              <Button> 
-              <NotificationsIcon sx={{color:"white"}} />
+              <Button>
+                <NotificationsIcon sx={{ color: "white" }} />
               </Button>
 
               {/* Hide on User Available */}
@@ -195,49 +209,90 @@ const NavBar = () => {
               {/* <SearchBox handleSearch={handleSearch} setSearch={setSearch} /> */}
             </Box>
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
+              <Tooltip
+                title={user ? "Open settings" : "Login To Open Settings"}
+              >
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   {/* have to replace with user icon */}
-                  <AccountCircleIcon
-                    style={{ fontSize: "3rem", color: "black" }}
-                  />
+                  {user ? (
+                    <img
+                      style={{
+                        borderRadius: "50%",
+                        height: "3rem",
+                        width: "3rem",
+                      }}
+                      src={user?.photoURL}
+                      alt=""
+                    />
+                  ) : (
+                    <AccountCircleIcon
+                      style={{ fontSize: "3rem", color: "black" }}
+                    />
+                  )}
                 </IconButton>
               </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {/* {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))} */}
 
-                <MenuItem>
-                  <Typography textAlign="center"> UserName </Typography>
-                </MenuItem>
-                <IconMenuItem
-                  itemName={"Dashboard"}
-                  pathName={"/dashboard"}
-                  handleCloseUserMenu={handleCloseUserMenu}
-                />
-                {/*  Onclik logout and display when user available */}
-                <MenuItem>
-                  <Button sx={{ color: "black" }}>LogOut</Button>
-                </MenuItem>
-              </Menu>
+              {user ? (
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {/* {settings.map((setting) => (
+    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+      <Typography textAlign="center">{setting}</Typography>
+    </MenuItem>
+  ))} */}
+
+                  {user ? (
+                    <MenuItem>
+                      <Typography textAlign="center">
+                        {user?.displayName}
+                      </Typography>
+                    </MenuItem>
+                  ) : (
+                    ""
+                  )}
+
+                  {user ? (
+                    <IconMenuItem
+                      itemName={"Dashboard"}
+                      pathName={"/dashboard"}
+                      handleCloseUserMenu={handleCloseUserMenu}
+                    />
+                  ) : (
+                    ""
+                  )}
+
+                  {/*  Onclik logout and display when user available */}
+                  {user ? (
+                    <MenuItem>
+                      <Button
+                        style={{ backgroundColor: "#1976d2" }}
+                        onClick={handleLogout}
+                        sx={{ color: "white" }}
+                      >
+                        LogOut
+                      </Button>
+                    </MenuItem>
+                  ) : (
+                    ""
+                  )}
+                </Menu>
+              ) : (
+                ""
+              )}
             </Box>
           </Toolbar>
         </Container>
