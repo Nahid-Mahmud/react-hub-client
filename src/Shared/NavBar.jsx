@@ -26,11 +26,15 @@ import { Badge } from "@mui/material";
 // const pages = ["Products", "Pricing", "Blog"];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 import MailIcon from "@mui/icons-material/Mail";
+import useAnnouncements from "../Hooks/useAnnouncements";
 
 const NavBar = () => {
   const { user, signoutUser } = useAuth();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const [announcementsData, isAnnounceMentLoading, announcementRefetch] =
+    useAnnouncements();
 
   // search bar state management
   // const [search, setSearch] = useState("");
@@ -202,8 +206,15 @@ const NavBar = () => {
               {/* Icon Here */}
               {/* Badge count will be dinamic  */}
               <Button>
-                <Badge badgeContent={4} color="primary">
-                  <MailIcon sx={{color:'white'}} color="action" />
+                <Badge
+                  badgeContent={
+                    announcementsData?.length > 0
+                      ? announcementsData?.length
+                      : 0
+                  }
+                  color="primary"
+                >
+                  <MailIcon sx={{ color: "white" }} color="action" />
                 </Badge>
               </Button>
 
