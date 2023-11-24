@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "../Shared/NavBar";
 import { Container } from "@mui/material";
+import Footer from "../Shared/Footer";
 
 const MainLayout = () => {
   return (
@@ -9,6 +10,7 @@ const MainLayout = () => {
       <Container maxWidth="xl">
         <Outlet />
       </Container>
+      <Footer />
     </div>
   );
 };

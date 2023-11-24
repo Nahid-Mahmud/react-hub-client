@@ -3,11 +3,8 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Button } from "@mui/material";
 
-const SearchBox = () => {
-  const [search, setSearch] = React.useState("");
-  const handleSearch = () => {
-    console.log(search.label);
-  };
+const SearchBox = ({setSearch,handleSearch,}) => {
+
   return (
     <>
       <Autocomplete
@@ -23,6 +20,8 @@ const SearchBox = () => {
           height: "50px",
           borderRadius: "10px",
           marginTop: "10px",
+          overflow: "hidden"
+          
         }}
         renderInput={(params) => <TextField {...params} />}
       />

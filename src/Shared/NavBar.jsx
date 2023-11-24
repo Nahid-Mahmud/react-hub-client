@@ -1,4 +1,4 @@
-import * as React from "react";
+
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -16,21 +16,24 @@ import NavItem from "./NavItem";
 import NavItemMobile from "./NavItemMobile";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import IconMenuItem from "./IconMenuItem";
-import SearchIcon from "@mui/icons-material/Search";
-import { Grid } from "@mui/material";
+// import SearchIcon from "@mui/icons-material/Search";
+// import { Grid } from "@mui/material";
 import SearchBox from "../Components/SearchBox/SearchBox";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 // const pages = ["Products", "Pricing", "Blog"];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const NavBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   // search bar state management
-
-  const [search, setSearch] = React.useState("");
+  const [search, setSearch] = useState("");
+  const handleSearch = () => {
+    console.log(search.label);
+  };
 
   // navbar menu state management
 
@@ -52,10 +55,6 @@ const NavBar = () => {
     setAnchorElUser(null);
   };
 
-  const handleSearch = () => {
-    console.log(search);
-  };
-
   return (
     <>
       <AppBar position="static">
@@ -74,7 +73,7 @@ const NavBar = () => {
               <Typography
                 variant="h6"
                 noWrap
-                component="a"
+                // component="a" // this is for link
                 sx={{
                   mr: 2,
                   display: { xs: "none", md: "flex" },
@@ -143,6 +142,7 @@ const NavBar = () => {
                   pathName={"/login"}
                   handleCloseNavMenu={handleCloseNavMenu}
                 />
+               <SearchBox handleSearch={handleSearch} setSearch={setSearch} />
               </Menu>
             </Box>
             {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
@@ -150,7 +150,6 @@ const NavBar = () => {
               variant="h5"
               noWrap
               component="a"
-              href="#app-bar-with-responsive-menu"
               sx={{
                 mr: 2,
                 display: { xs: "flex", md: "none" },
@@ -186,7 +185,9 @@ const NavBar = () => {
                 handleCloseNavMenu={handleCloseNavMenu}
               />
 
-              <SearchBox />
+              {/* Search Box */}
+
+              <SearchBox handleSearch={handleSearch} setSearch={setSearch} />
             </Box>
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">

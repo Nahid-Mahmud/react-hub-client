@@ -4,8 +4,8 @@ import { NavLink } from "react-router-dom";
 
 const NavItemMobile = ({ itemName, pathName, handleCloseNavMenu }) => {
   return (
-    <NavLink to={pathName}>
-      <MenuItem onClick={handleCloseNavMenu}>
+    <NavLink style={{textDecoration:'none'}} to={pathName}>
+      <MenuItem  onClick={handleCloseNavMenu}>
         <Typography sx={{color: "black"}} textAlign="center"> {itemName} </Typography>
       </MenuItem>
     </NavLink>
