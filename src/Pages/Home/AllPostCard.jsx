@@ -1,8 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const AllPostCard = ({ post }) => {
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
   const {
     _id,
     authorName,
@@ -28,12 +30,15 @@ const AllPostCard = ({ post }) => {
   const totalComments = allCommentsData.filter(
     (comment) => comment.postTitle === postTitle
   );
-//   console.log(totalComments);
+  //   console.log(totalComments);
 
-  const totalVotes = upVoteCount + downVoteCount;
+  // const totalVotes = upVoteCount + downVoteCount;
+  const handlePostClick = () => {
+    navigate(`/post/${_id}`);
+  };
 
   return (
-    <div>
+    <div onClick={handlePostClick} className="cursor-pointer">
       <div className="space-y-2 shadow-lg  p-5 ">
         <div className="flex  items-center gap-2">
           <div className="avatar">

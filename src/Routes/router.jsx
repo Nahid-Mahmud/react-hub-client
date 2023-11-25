@@ -6,6 +6,7 @@ import LogIn from "../Pages/LogIn/LogIn";
 import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import Membership from "../Pages/Membership/Membership";
+import PostDeatil from "../Shared/PostDeatil";
 
 const router = createBrowserRouter([
   {
@@ -18,11 +19,13 @@ const router = createBrowserRouter([
       },
       {
         path: "membership",
-        element: (
-          <PrivateRoute>
-            <Membership />
-          </PrivateRoute>
-        ),
+        element: <Membership />,
+      },
+      {
+        path: "post/:id",
+        element: <PostDeatil />,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_baseUrl}/posts/${params.id}`),
       },
     ],
   },
