@@ -4,6 +4,8 @@ import MainLayout from "../Layouts/MainLayout";
 import Home from "../Pages/Home/Home";
 import LogIn from "../Pages/LogIn/LogIn";
 import SignUp from "../Pages/SignUp/SignUp";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import Membership from "../Pages/Membership/Membership";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +18,11 @@ const router = createBrowserRouter([
       },
       {
         path: "membership",
-        element: <div> Membership is comming soon </div>,
+        element: (
+          <PrivateRoute>
+            <Membership />
+          </PrivateRoute>
+        ),
       },
     ],
   },

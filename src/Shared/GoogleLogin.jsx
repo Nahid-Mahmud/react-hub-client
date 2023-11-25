@@ -1,10 +1,11 @@
 import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../Hooks/useAuth";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const GoogleLogin = ({ text, setSignInUpErr }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const axiosPublic = useAxiosPublic();
   const { googleLogIn } = useAuth();
   const handleGoogleLogin = () => {
@@ -24,7 +25,7 @@ const GoogleLogin = ({ text, setSignInUpErr }) => {
           if (res.data.insertedId > 0) {
             console.log("user created successfully");
           }
-          navigate("/");
+          navigate(location.state ? location.state : "/");
         });
       })
       .catch((err) => {

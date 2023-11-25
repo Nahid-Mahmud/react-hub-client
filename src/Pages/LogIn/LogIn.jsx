@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import GoogleLogin from "../../Shared/GoogleLogin";
 import { Helmet } from "react-helmet-async";
 import { useState } from "react";
@@ -6,9 +6,12 @@ import { useAuth } from "../../Hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../FireBase/Firebase.config";
+import { toast } from "react-toastify";
 // import { auth } from "../../Provider/AuthProvider";
 
 const LogIn = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const {
     register,
     handleSubmit,
@@ -25,6 +28,20 @@ const LogIn = () => {
     signInWithEmailAndPassword(auth, formData.email, formData.password)
       .then((res) => {
         console.log("signupsuccess", res.user);
+        const currentUser = res.user;
+        if (currentUser) {
+          toast(" Sign In Successfull", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          navigate(location.state ? location.state : "/");
+        }
       })
       .catch((err) => {
         console.log(err.message);
