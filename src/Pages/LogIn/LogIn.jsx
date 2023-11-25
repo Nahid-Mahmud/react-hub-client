@@ -5,7 +5,8 @@ import { useState } from "react";
 import { useAuth } from "../../Hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../Provider/AuthProvider";
+import { auth } from "../../FireBase/Firebase.config";
+// import { auth } from "../../Provider/AuthProvider";
 
 const LogIn = () => {
   const {
@@ -16,7 +17,7 @@ const LogIn = () => {
   } = useForm();
   const [signInUpErr, setSignInUpErr] = useState("");
   const { emailPassLogin } = useAuth();
-  console.log(emailPassLogin);
+  // console.log(emailPassLogin);
 
   const onSubmit = (formData) => {
     setSignInUpErr("");

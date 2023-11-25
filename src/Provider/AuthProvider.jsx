@@ -9,15 +9,17 @@ import {
   signOut,
 } from "firebase/auth";
 import { app } from "../FireBase/Firebase.config";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 // authcontext
 export const AuthContext = createContext(null);
 // auth for firebase
-export const auth = getAuth(app);
+const auth = getAuth(app);
 // provider for google
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
+  const axiosPublic = useAxiosPublic();
   //use state for user
   const [user, setUser] = useState(null);
   // use state for user Loading time
@@ -52,6 +54,19 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+
+      if (currentUser) {
+        const userInfo = { email: currentUser.email };
+        axiosPublic.post("/jwt", userInfo).then((res) => {
+          if (res.data.token) {
+            localStorage.setItem("token", res.data.token);
+            setLoading(false);
+          }
+        });
+      } else {
+        localStorage.removeItem("token");
+      }
+
       console.log("user Form authProvider observer", currentUser);
       setLoading(false);
     });
@@ -59,7 +74,7 @@ const AuthProvider = ({ children }) => {
     return () => {
       unSubscribe();
     };
-  }, []);
+  }, [axiosPublic]);
 
   // const demoUser = { name: "nahid" };
 

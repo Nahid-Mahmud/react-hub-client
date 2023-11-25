@@ -21,7 +21,7 @@ const AllPosts = ({ search }) => {
   const postCount = parseInt(postCountData.postsCount);
   const itemPerPage = 5;
   const numberOfpages = Math.ceil(postCount / itemPerPage);
-  console.log("Number of pages", numberOfpages);
+  // console.log("Number of pages", numberOfpages);
 
   let pages = [];
 
@@ -32,7 +32,7 @@ const AllPosts = ({ search }) => {
   // pagination ends here
   const [sort, setSort] = useState(null);
   const [postsData, setPostsData] = useState([]);
-  console.log(postsData);
+  // console.log(postsData);
 
   const handleSortByPopularity = () => {
     setSort("popularity");
@@ -45,7 +45,6 @@ const AllPosts = ({ search }) => {
         setPostsData(res.data);
       });
   }, [axiosPublic, sort, currentPage, search]);
-
 
   return (
     <div className="max-w-[90rem] pb-10 mx-auto">

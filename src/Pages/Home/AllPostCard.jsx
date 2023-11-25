@@ -1,4 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+
 const AllPostCard = ({ post }) => {
+  const axiosPublic = useAxiosPublic();
   const {
     _id,
     authorName,
@@ -11,6 +15,20 @@ const AllPostCard = ({ post }) => {
     upVoteCount,
     downVoteCount,
   } = post;
+
+  const { data: allCommentsData = [], isLoading } = useQuery({
+    queryKey: ["comments"],
+    queryFn: async () => {
+      const res = await axiosPublic.get(`/comments`);
+      return res.data;
+    },
+  });
+  //   console.log(allCommentsData);
+
+  const totalComments = allCommentsData.filter(
+    (comment) => comment.postTitle === postTitle
+  );
+//   console.log(totalComments);
 
   const totalVotes = upVoteCount + downVoteCount;
 
@@ -29,7 +47,9 @@ const AllPostCard = ({ post }) => {
           <p className="text-lg max-w-[24rem] font-medium">{postTitle}</p>
           <p>#{tags}</p>
           <p> Publish Date : {time} </p>
-          <p>Total Comments: {commentsCount}</p>
+          <p>
+            Total Comments: {totalComments?.length ? totalComments.length : 0}
+          </p>
           <div>
             <p> Total UpVote :{upVoteCount} </p>
             <p> Total DownVote {downVoteCount} </p>
