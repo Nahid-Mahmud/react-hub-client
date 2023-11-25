@@ -22,16 +22,12 @@ const AllPosts = ({ search }) => {
   const itemPerPage = 5;
   const numberOfpages = Math.ceil(postCount / itemPerPage);
   console.log("Number of pages", numberOfpages);
-  // console.log( "Number Of pages", numberOfpages);
-  // const pages = [...Array(numberOfpages).keys()];
-  // console.log("pages Array" , pages);
+
   let pages = [];
 
   if (numberOfpages) {
     pages = [...Array(numberOfpages).keys()];
   }
-  // const pagesButton = [...Array(numberOfpages).keys()];
-  // console.log(pagesButton);
 
   // pagination ends here
   const [sort, setSort] = useState(null);
@@ -50,9 +46,6 @@ const AllPosts = ({ search }) => {
       });
   }, [axiosPublic, sort, currentPage, search]);
 
-  // console.log(postCountData.postsCount);
-
-  // console.log(postsData);
 
   return (
     <div className="max-w-[90rem] pb-10 mx-auto">
