@@ -6,8 +6,11 @@ import PopularTags from "./PopularTags";
 import { useState } from "react";
 import Announcements from "./Announcements";
 import AllPosts from "./AllPosts";
+import useAnnouncements from "../../Hooks/useAnnouncements";
 
 const Home = () => {
+  const [announcementsData, isAnnounceMentLoading, announcementRefetch] =
+    useAnnouncements();
   const [search, setSearch] = useState("");
 
   const handleSearch = () => {
@@ -26,7 +29,7 @@ const Home = () => {
         handleSearch={handleSearch}
       />
       <PopularTags />
-      <Announcements />
+      {announcementsData.length > 0 && <Announcements />}
       <AllPosts />
     </>
   );
