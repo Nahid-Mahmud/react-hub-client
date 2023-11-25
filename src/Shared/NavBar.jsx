@@ -20,21 +20,23 @@ import IconMenuItem from "./IconMenuItem";
 // import SearchBox from "../Components/SearchBox/SearchBox";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+// import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useAuth } from "../Hooks/useAuth";
 import { Badge } from "@mui/material";
 // const pages = ["Products", "Pricing", "Blog"];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 import MailIcon from "@mui/icons-material/Mail";
 import useAnnouncements from "../Hooks/useAnnouncements";
+import useAdmin from "../Hooks/useAdmin";
 
 const NavBar = () => {
   const { user, signoutUser } = useAuth();
+  const [isAdmin] = useAdmin();
+  console.log("isAdmin", isAdmin);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
-  const [announcementsData, isAnnounceMentLoading, announcementRefetch] =
-    useAnnouncements();
+  const [announcementsData] = useAnnouncements();
 
   // search bar state management
   // const [search, setSearch] = useState("");
