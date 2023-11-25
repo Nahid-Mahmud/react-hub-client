@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Loader from "../../Shared/Loader";
 
 const PopularTags = () => {
   const axiosPublic = useAxiosPublic();
@@ -10,6 +11,8 @@ const PopularTags = () => {
       return res.data;
     },
   });
+  console.log("tags Loading", tagsLoading);
+  if (tagsLoading) return <Loader />;
   return (
     <div className="max-w-[90rem] pb-10 mx-auto">
       <h1 className="text-3xl font-bold text-center my-10 capitalize underline">

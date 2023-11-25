@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
-const Banner = ({ handleSearch, setSearch, search }) => {
+const Banner = ({ handleSearch, setSearch }) => {
   const axiosPublic = useAxiosPublic();
 
   const { data: tags, isLoading: tagsLoading } = useQuery({
@@ -37,14 +37,14 @@ const Banner = ({ handleSearch, setSearch, search }) => {
           </p>
           <div className="flex items-center justify-center">
             <input
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => setSearch(e.target.value.toLowerCase())}
               type="text"
               placeholder="Type here"
               className="input rounded-r-none text-black  w-full max-w-xs"
             />
             <button
               onClick={handleSearch}
-              className="p-[0.75rem] bg-blue-600 rounded-r-lg "
+              className="md:p-[0.75rem] bg-blue-600 rounded-r-lg "
             >
               Get Started
             </button>

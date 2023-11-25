@@ -7,6 +7,7 @@ import { useState } from "react";
 import Announcements from "./Announcements";
 import AllPosts from "./AllPosts";
 import useAnnouncements from "../../Hooks/useAnnouncements";
+import Loader from "../../Shared/Loader";
 
 const Home = () => {
   const [announcementsData, isAnnounceMentLoading, announcementRefetch] =
@@ -29,8 +30,13 @@ const Home = () => {
         handleSearch={handleSearch}
       />
       <PopularTags />
-      {announcementsData.length > 0 && <Announcements />}
-      <AllPosts />
+      {isAnnounceMentLoading ? (
+        <Loader />
+      ) : (
+        announcementsData.length > 0 && <Announcements />
+      )}
+      {/* {announcementsData.length > 0 && <Announcements />} */}
+      <AllPosts search={search} />
     </>
   );
 };
