@@ -4,8 +4,10 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { FacebookIcon, FacebookShareButton } from "react-share";
+import { useAuth } from "../Hooks/useAuth";
 
 const PostDeatil = () => {
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const postData = useLoaderData();
   const {
@@ -153,17 +155,18 @@ const PostDeatil = () => {
               className="textarea textarea-bordered textarea-lg w-full max-w-xs"
             ></textarea>
           </div>
-          <input
-            type="submit"
-            value="Post Comment"
-            className="btn btn-xs sm:btn-sm md:btn-md mt-5 bg-blue-600 text-white h-[3rem] hover:bg-blue-800 hover:text-white lg:btn-lg"
-          />
+          {!user ? (
+            <p  className="text-xl text-red-500 my-3"> User Must Login to comment. </p>
+          ) : (
+            <input
+              type="submit"
+              value="Post Comment"
+              className="btn btn-xs sm:btn-sm md:btn-md mt-5 bg-blue-600 text-white h-[3rem] hover:bg-blue-800 hover:text-white lg:btn-lg"
+            />
+          )}
         </form>
         <div className=" flex flex-col shadow-md w-fit md:mx-auto p-5  items-center">
-          <FacebookShareButton
-            url={shareUrl}
-            hashtag={`#${tags}`}
-          >
+          <FacebookShareButton url={shareUrl} hashtag={`#${tags}`}>
             <FacebookIcon size={42} round={true} />
           </FacebookShareButton>
           <p>Facebook Share</p>

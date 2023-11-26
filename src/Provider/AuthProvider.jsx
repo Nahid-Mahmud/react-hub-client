@@ -68,7 +68,6 @@ const AuthProvider = ({ children }) => {
       }
 
       console.log("user Form authProvider observer", currentUser);
-      setLoading(false);
     });
 
     return () => {
