@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
+// eslint-disable-next-line react/prop-types
 const Banner = ({ handleSearch, setSearch }) => {
   const axiosPublic = useAxiosPublic();
 
@@ -46,7 +47,7 @@ const Banner = ({ handleSearch, setSearch }) => {
               onClick={handleSearch}
               className="md:p-[0.75rem] bg-blue-600 rounded-r-lg "
             >
-              Get Started
+              Search
             </button>
           </div>
           <div>
