@@ -1,16 +1,25 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { FacebookIcon, FacebookShareButton } from "react-share";
 import { useAuth } from "../Hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import useUserBadge from "../Hooks/useUserBadge";
 
 const PostDeatil = () => {
+  const [commentCount, setCommentCount] = useState(0);
   const navigate = useNavigate();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
   const postData = useLoaderData();
+  const [isUserBadge, isUserBadgeLoading] = useUserBadge();
+  console.log('comment count', commentCount)
+  const userCommentLimit = commentCount >= 3 && isUserBadge === "bronze";
+  console.log("userCommentLimit",userCommentLimit)
   const {
     _id,
     authorName,
@@ -24,6 +33,15 @@ const PostDeatil = () => {
     downVoteCount,
   } = postData;
   console.log(postData);
+
+  // get user comment count
+
+  useEffect(() => {
+    axiosPublic.get(`/comments/${user?.email}`).then((res) => {
+      console.log( "Total user comment =", res.data?.totalUserComments);
+      return setCommentCount(res.data?.totalUserComments || 0);
+    });
+  }, [user?.email, axiosPublic]);
 
   // react share url
   const shareUrl = `${import.meta.env.VITE_CNAME}/post/${_id}`;
@@ -105,7 +123,7 @@ const PostDeatil = () => {
           title: "Success",
           text: "Your Comment has been added",
         });
-        navigate('/')
+        navigate("/");
       }
     });
     console.log(`submit button is working`, comments);
@@ -164,6 +182,9 @@ const PostDeatil = () => {
               User Must Login to comment.{" "}
             </p>
           ) : (
+
+            userCommentLimit ? <p className="text-xl text-red-500 my-3">Genarel User can comment only 3 times. Become a Gold Menber to comment more.</p>:
+
             <input
               type="submit"
               value="Post Comment"

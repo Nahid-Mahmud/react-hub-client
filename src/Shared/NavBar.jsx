@@ -28,10 +28,13 @@ import { Badge } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
 import useAnnouncements from "../Hooks/useAnnouncements";
 import useAdmin from "../Hooks/useAdmin";
+import useUserBadge from "../Hooks/useUserBadge";
 
 const NavBar = () => {
   const { user, signoutUser } = useAuth();
   const [isAdmin] = useAdmin();
+  const [isUserBadge, isUserBadgeLoading] = useUserBadge();
+  console.log( "isUserBadge", isUserBadge);
   console.log("isAdmin", isAdmin);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
