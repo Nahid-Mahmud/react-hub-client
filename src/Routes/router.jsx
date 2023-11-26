@@ -14,7 +14,7 @@ import MyPosts from "../Pages/DashboardPages/MyPosts/MyPosts";
 import AdminProfile from "../Pages/DashboardPages/AdminProfile/AdminProfile";
 import ManageUsers from "../Pages/DashboardPages/ManageUsers/ManageUsers";
 import ReportedComments from "../Pages/DashboardPages/ReportedComments/ReportedComments";
-import MakeAnnouncement from "../Pages/DashboardPages/MakeAnnouncement/MakeAnnouncement";
+import MakeAnnouncement from "../Pages/DashboardPages/MakeSnnouncement/MakeAnnouncement";
 
 const router = createBrowserRouter([
   {
