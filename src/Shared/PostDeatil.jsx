@@ -16,9 +16,10 @@ const PostDeatil = () => {
   const axiosSecure = useAxiosSecure();
   const axiosPublic = useAxiosPublic();
   const postData = useLoaderData();
+  // Limited comment for bronze user
   const [isUserBadge, isUserBadgeLoading] = useUserBadge();
   console.log('comment count', commentCount)
-  const userCommentLimit = commentCount >= 3 && isUserBadge === "bronze";
+  const userCommentLimit = commentCount >= 5 && isUserBadge === "bronze";
   console.log("userCommentLimit",userCommentLimit)
   const {
     _id,
