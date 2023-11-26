@@ -3,7 +3,7 @@ import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
-import useAxiosPublic from "../Hooks/useAxiosPublic";
+import { FacebookIcon, FacebookShareButton } from "react-share";
 
 const PostDeatil = () => {
   const axiosSecure = useAxiosSecure();
@@ -21,6 +21,9 @@ const PostDeatil = () => {
     downVoteCount,
   } = postData;
   console.log(postData);
+
+  // react share url
+  const shareUrl = `${import.meta.env.VITE_baseUrl}/post/${_id}`;
   //   states for upvote and downvote
 
   const [upvote, setUpvote] = useState(upVoteCount);
@@ -105,7 +108,7 @@ const PostDeatil = () => {
 
   return (
     <div className=" min-h-[50vh] md:max-w-[95vw] max-w-[95vw] mx-auto flex flex-col py-10 items-center justify-center">
-      <div className="space-y-2 shadow-lg  p-5 ">
+      <div className="space-y-2  shadow-lg   p-5 ">
         <div className="flex  items-center gap-2">
           <div className="avatar">
             <div className="w-12 rounded-full">
@@ -153,9 +156,15 @@ const PostDeatil = () => {
           <input
             type="submit"
             value="Post Comment"
-            className="btn btn-xs sm:btn-sm md:btn-md mt-5 bg-blue-600 text-white hover:bg-blue-800 hover:text-white lg:btn-lg"
+            className="btn btn-xs sm:btn-sm md:btn-md mt-5 bg-blue-600 text-white h-[3rem] hover:bg-blue-800 hover:text-white lg:btn-lg"
           />
         </form>
+        <div className=" flex flex-col shadow-md w-fit md:mx-auto p-5  items-center">
+          <FacebookShareButton url={shareUrl}>
+            <FacebookIcon size={42} round={true} />
+          </FacebookShareButton>
+          <p>Facebook Share</p>
+        </div>
       </div>
     </div>
   );
