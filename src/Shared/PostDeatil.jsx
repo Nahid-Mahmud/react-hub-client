@@ -23,7 +23,7 @@ const PostDeatil = () => {
   console.log(postData);
 
   // react share url
-  const shareUrl = `${import.meta.env.VITE_baseUrl}/post/${_id}`;
+  const shareUrl = `${import.meta.env.VITE_CNAME}/post/${_id}`;
   //   states for upvote and downvote
 
   const [upvote, setUpvote] = useState(upVoteCount);
@@ -160,7 +160,10 @@ const PostDeatil = () => {
           />
         </form>
         <div className=" flex flex-col shadow-md w-fit md:mx-auto p-5  items-center">
-          <FacebookShareButton url={shareUrl}>
+          <FacebookShareButton
+            url={shareUrl}
+            hashtag={`#${tags}`}
+          >
             <FacebookIcon size={42} round={true} />
           </FacebookShareButton>
           <p>Facebook Share</p>

@@ -5,7 +5,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 const Banner = ({ handleSearch, setSearch }) => {
   const axiosPublic = useAxiosPublic();
 
-  const { data: tags, isLoading: tagsLoading } = useQuery({
+  const { data: tags=[], isLoading: tagsLoading } = useQuery({
     queryKey: ["tags"],
     queryFn: async () => {
       const res = await axiosPublic.get("/tags");

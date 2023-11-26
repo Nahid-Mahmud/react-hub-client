@@ -12,7 +12,7 @@ import Loader from "../../Shared/Loader";
 const Home = () => {
   const [announcementsData, isAnnounceMentLoading, announcementRefetch] =
     useAnnouncements();
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(undefined);
 
   const handleSearch = () => {
     console.log(search);

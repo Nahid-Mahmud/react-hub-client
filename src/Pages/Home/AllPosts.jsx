@@ -57,13 +57,9 @@ const AllPosts = ({ search }) => {
         </button>
       </div>
       <div className="grid max-w-[95vw] mx-auto mb-10  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {postsData.length > 0 ? (
-          postsData.map((post, index) => (
-            <AllPostCard key={index} post={post} />
-          ))
-        ) : (
-          <Loader />
-        )}
+        {postsData.map((post, index) => (
+          <AllPostCard key={index} post={post} />
+        ))}
       </div>
       {/* Pagination */}
       <div className="text-center space-x-2">
