@@ -3,9 +3,11 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useAuth } from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ badgeDataRefetch }) => {
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useAuth();
@@ -13,6 +15,10 @@ const CheckoutForm = () => {
   // state for storing client secret
   const [clientSecret, setClientSecret] = useState("");
   const [payError, setPayError] = useState("");
+
+  useEffect(() => {
+    badgeDataRefetch();
+  }, [badgeDataRefetch]);
 
   useEffect(() => {
     axiosSecure.get("/create-payment-intent").then((res) => {
@@ -71,13 +77,18 @@ const CheckoutForm = () => {
         console.log("Payment Id", paymentIntent?.id);
         axiosSecure
           .put(`/user/role/${user?.email}`, {
-            role: "gold",
+            badge: "gold",
             paymentId: paymentIntent?.id,
           })
           .then((res) => {
             console.log(res.data);
+            if (res.data.modifiedCount > 0) {
+                badgeDataRefetch();
+            }
           });
-
+        // refetch user data for badge update
+      
+        // show alert
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -97,6 +108,7 @@ const CheckoutForm = () => {
         className="md:max-w-[50vw] lg:max-w-[30vw] max-w-[95vw] mx-auto"
         onSubmit={handleSubmit}
       >
+        <p className="py-5 font-semibold">Enter Your card Details</p>
         <CardElement
           options={{
             style: {

@@ -5,16 +5,20 @@ import useAxiosSecure from "./useAxiosSecure";
 const useUserBadge = () => {
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
-  const { data: isUserBadge="", isPending: isUserBadgeLoading } = useQuery({
+  const {
+    data: isUserBadge = "",
+    isPending: isUserBadgeLoading,
+    refetch: badgeDataRefetch,
+  } = useQuery({
     queryKey: [user?.email, "isUser"],
     enabled: !loading,
     queryFn: async () => {
       const res = await axiosSecure.get(`/user/${user.email}`);
-    //   console.log(res.data);
+      console.log(res.data);
       return res.data?.badge;
     },
   });
-return [isUserBadge, isUserBadgeLoading];
+  return [isUserBadge, isUserBadgeLoading, badgeDataRefetch];
 };
 
 export default useUserBadge;

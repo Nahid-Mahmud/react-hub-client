@@ -2,6 +2,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "../Hooks/useAuth";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const GoogleLogin = ({ text, setSignInUpErr }) => {
   const navigate = useNavigate();
@@ -25,6 +26,16 @@ const GoogleLogin = ({ text, setSignInUpErr }) => {
           if (res.data.insertedId > 0) {
             console.log("user created successfully");
           }
+          toast(" Sign In Successfull", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
           navigate(location.state ? location.state : "/");
         });
       })
