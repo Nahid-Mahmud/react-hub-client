@@ -50,7 +50,7 @@ const LogIn = () => {
   };
 
   return (
-    <div className="hero min-h-screen bg-gradient-to-r from-blue-500 to-blue-900">
+    <div className="hero min-h-screen bg-gradient-to-r from-blue-200 to-blue-600">
       <div className="w-full  max-w-md ">
         <div className="bg-white bg-opacity-50 shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <form onSubmit={handleSubmit(onSubmit)} className="pb-6">
@@ -95,7 +95,7 @@ const LogIn = () => {
             </div>
             <div className="flex items-center gap-3 justify-between">
               <input
-                className="btn bg-green-500 text-black hover:bg-green-600 transition"
+                className="btn bg-blue-800 text-white hover:bg-blue-900 transition"
                 type="submit"
                 value="Sign In"
               />
@@ -121,7 +121,7 @@ const LogIn = () => {
                 text="Sign In With Google "
               ></GoogleLogin>
             </div>
-            <button className="btn bg-green-600 hover:bg-green-700 text-black  hover:text-black">
+            <button className="btn bg-blue-800 text-white hover:bg-blue-900  hover:text-white">
               <Link to={"/"}>Go Home</Link>
             </button>
           </div>
