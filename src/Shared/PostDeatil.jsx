@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
 import { useState } from "react";
 import Swal from "sweetalert2";
@@ -7,6 +7,7 @@ import { FacebookIcon, FacebookShareButton } from "react-share";
 import { useAuth } from "../Hooks/useAuth";
 
 const PostDeatil = () => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const postData = useLoaderData();
@@ -94,6 +95,7 @@ const PostDeatil = () => {
     const postCommentData = {
       postTitle: postTitle,
       comments: comments,
+      email: user?.email,
     };
     axiosSecure.post(`/comments`, postCommentData).then((res) => {
       console.log(res.data);
@@ -103,6 +105,7 @@ const PostDeatil = () => {
           title: "Success",
           text: "Your Comment has been added",
         });
+        navigate('/')
       }
     });
     console.log(`submit button is working`, comments);
@@ -156,7 +159,10 @@ const PostDeatil = () => {
             ></textarea>
           </div>
           {!user ? (
-            <p  className="text-xl text-red-500 my-3"> User Must Login to comment. </p>
+            <p className="text-xl text-red-500 my-3">
+              {" "}
+              User Must Login to comment.{" "}
+            </p>
           ) : (
             <input
               type="submit"
