@@ -36,7 +36,7 @@ const Home = () => {
         announcementsData.length > 0 && <Announcements />
       )}
       {/* {announcementsData.length > 0 && <Announcements />} */}
-      <AllPosts search={search} />
+      <AllPosts setSearch={setSearch} search={search} />
     </>
   );
 };

@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import AllPostCard from "./AllPostCard";
 import Loader from "../../Shared/Loader";
 
-const AllPosts = ({ search }) => {
+const AllPosts = ({ search, setSearch }) => {
   const axiosPublic = useAxiosPublic();
 
   // pagination
@@ -35,6 +35,7 @@ const AllPosts = ({ search }) => {
   // console.log(postsData);
 
   const handleSortByPopularity = () => {
+    setSearch(undefined);
     setSort("popularity");
   };
 
