@@ -2,10 +2,12 @@ import { useState } from "react";
 import { useAuth } from "../../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AddPosts = () => {
   // axios instance
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   //   const { user } = useAuth();
   // get tags
   const { data: tags = [], isLoading: tagsLoading } = useQuery({
@@ -27,7 +29,35 @@ const AddPosts = () => {
 
   const handleSubmitAssignment = (e) => {
     e.preventDefault();
-    console.log(value);
+    //  authorName ,email ,authorPicture,postTitle,tags,description,time,commentsCount,upVoteCount,downVoteCount
+    const authorName = user?.displayName;
+    const email = user?.email;
+    const authorPicture = user?.photoURL;
+    const postTitle = e.target.title.value;
+    const tags = value;
+    const description = e.target.description.value;
+    const time = new Date().toLocaleDateString();
+    const upVoteCount = 0;
+    const downVoteCount = 0;
+
+    const postInfo = {
+      authorName,
+      email,
+      authorPicture,
+      postTitle,
+      tags,
+      description,
+      time,
+      upVoteCount,
+      downVoteCount,
+    };
+    console.log(postInfo);
+
+    axiosSecure.post("/posts", postInfo).then((res) => {
+      console.log(res.data);
+    });
+
+    // console.log(value);
   };
 
   return (

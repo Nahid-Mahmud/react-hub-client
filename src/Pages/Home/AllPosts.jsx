@@ -84,7 +84,7 @@ const AllPosts = ({ search, setSearch }) => {
               onClick={() => setCurrentPage(pageNumber)}
               key={index}
             >
-              {pageNumber}
+              {pageNumber +1}
             </button>
           );
         })}
