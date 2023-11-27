@@ -81,6 +81,7 @@ const AddPosts = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        e.target.reset();
         userPostDataRefetch();
       }
     });

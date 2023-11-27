@@ -121,9 +121,11 @@ const LogIn = () => {
                 text="Sign In With Google "
               ></GoogleLogin>
             </div>
-            <button className="btn bg-blue-800 text-white hover:bg-blue-900  hover:text-white">
-              <Link to={"/"}>Go Home</Link>
-            </button>
+            <Link to={"/"}>
+              <button className="btn bg-blue-800 text-white hover:bg-blue-900  hover:text-white">
+                Go Home
+              </button>
+            </Link>
           </div>
         </div>
         <p className="text-center text-slate-300 text-xs">

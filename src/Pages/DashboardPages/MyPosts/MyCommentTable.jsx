@@ -1,23 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const MyCommentTable = () => {
+const MyCommentTable = ({ comment, index }) => {
+  // console.log(comment);
+
+  const [commentData, setcommentData] = useState("");
+
+  const { comments, _id, email, postTitle } = comment;
+
   const [buttonDisable, setbuttonDisable] = useState(true);
   const [value, setvalue] = useState("    Irrelavent");
   const handleOptionChange = (e) => {
     setvalue(e.target.value);
     setbuttonDisable(false);
   };
-  console.log(value);
+  // console.log(value);
+  useEffect(() => {
+    const slisedComment = comments.slice(0, 20);
+    setcommentData(slisedComment);
+  }, [comments]);
 
-  const handleReoprt = ()=>{
+  const handleReoprt = () => {
     setbuttonDisable(true);
-  }
+  };
+  const handleShowMore = () => {
+    setcommentData(comments);
+  };
+  const handleShowLess = () => {
+    setcommentData(comments.slice(0, 20));
+  };
 
   return (
     <tr>
-      <th>3</th>
-      <td>Brice Swyre</td>
-      <td>Tax Accountant</td>
+      <th>{index + 1}</th>
+      <td>{email}</td>
+      <td>
+        {commentData}{" "}
+        {commentData === comments ? (
+          <span
+            onClick={handleShowLess}
+            className="text-blue-600 font-medium cursor-pointer"
+          >
+            See Less...
+          </span>
+        ) : (
+          <span
+            onClick={handleShowMore}
+            className="text-blue-600 font-medium cursor-pointer"
+          >
+            See more...
+          </span>
+        )}
+      </td>
       <td>
         <select
           className="btn text-black capitalize   hover:bg-white hover:text-black bg-slate-200 "
@@ -38,7 +71,7 @@ const MyCommentTable = () => {
       </td>
       <td>
         <button
-        onClick={handleReoprt}
+          onClick={handleReoprt}
           disabled={buttonDisable}
           className="btn btn-outline bg-yellow-500"
         >

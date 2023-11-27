@@ -72,18 +72,16 @@ const Myposttable = ({ post, index, userPostDataRefetch }) => {
           onClick={handleCommentButton}
           className="btn bg-blue-600 text-white hover:bg-blue-800 "
         >
-          {" "}
-          Comment{" "}
-        </button>{" "}
+          Comments
+        </button>
       </td>
       <td>
         <button
           onClick={() => handleDelete(_id)}
           className="btn bg-red-600 text-white hover:bg-red-800 "
         >
-          {" "}
-          Delete{" "}
-        </button>{" "}
+          Delete
+        </button>
       </td>
     </tr>
   );

@@ -19,8 +19,8 @@ const PostDeatil = () => {
   // Limited comment for bronze user
   const [isUserBadge, isUserBadgeLoading] = useUserBadge();
   console.log("comment count", commentCount);
-  const userCommentLimit = commentCount >= 5 && isUserBadge === "bronze";
-  console.log("userCommentLimit", userCommentLimit);
+  // const userCommentLimit = commentCount >= 5 && isUserBadge === "bronze";
+  // console.log("userCommentLimit", userCommentLimit);
   const {
     _id,
     authorName,
@@ -182,11 +182,6 @@ const PostDeatil = () => {
             <p className="text-xl text-red-500 my-3">
               {" "}
               User Must Login to comment.{" "}
-            </p>
-          ) : userCommentLimit ? (
-            <p className="text-xl text-red-500 my-3">
-              Genarel User can comment only 3 times. Become a Gold Menber to
-              comment more.
             </p>
           ) : (
             <input

@@ -24,7 +24,7 @@ const PostRelatedCommentDashboard = () => {
   );
   console.log(mycomments);
 
-  console.log(postData);
+  // console.log(postData);
   return (
     <div>
       {" "}
@@ -47,12 +47,13 @@ const PostRelatedCommentDashboard = () => {
                 <th>Comment</th>
                 <th>Feedback</th>
                 <th>Action</th>
-
               </tr>
             </thead>
             <tbody>
               {mycomments.map((comment, index) => {
-                return <MyCommentTable key={index} />;
+                return (
+                  <MyCommentTable comment={comment} index={index} key={index} />
+                );
               })}
             </tbody>
           </table>

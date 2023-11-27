@@ -26,7 +26,7 @@ const MyPosts = () => {
                 <th>Post Title</th>
                 <th>Up Votes</th>
                 <th>Down Votes</th>
-                <th> Comment </th>
+                <th> Comments </th>
                 <th> Delete </th>
               </tr>
             </thead>
