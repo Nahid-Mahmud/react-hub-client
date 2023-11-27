@@ -1,8 +1,13 @@
 import { Outlet } from "react-router-dom";
 import DrawerItem from "../Shared/DrawerItem";
 import { FaBars } from "react-icons/fa6";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import useAdmin from "../Hooks/useAdmin";
 
 const DashboardLayout = () => {
+  const [isAdmin, isAdminLoading] = useAdmin();
+  console.log("User Is admin?", isAdmin);
   return (
     <div>
       <div>
@@ -18,6 +23,7 @@ const DashboardLayout = () => {
             {/* Page content here */}
 
             <Outlet />
+            <ToastContainer />
           </div>
           <div className="drawer-side">
             <label
@@ -28,49 +34,58 @@ const DashboardLayout = () => {
             <ul className="menu p-4 w-80 min-h-full bg-base-200 space-y-3 text-base-content">
               {/* Sidebar content here */}
               {/* genarel user links */}
-              <li>
-                <DrawerItem
-                  itemName={"My Profile"}
-                  pathName={"/dashboard/myprofile"}
-                />
-              </li>
-              <li>
-                <DrawerItem
-                  itemName={"Add Post"}
-                  pathName={"/dashboard/addpost"}
-                />
-              </li>
-              <li>
-                <DrawerItem
-                  itemName={"My Posts"}
-                  pathName={"/dashboard/myposts"}
-                />
-              </li>
+              {!isAdmin && (
+                <>
+                  <li>
+                    <DrawerItem
+                      itemName={"My Profile"}
+                      pathName={"/dashboard/myprofile"}
+                    />
+                  </li>
+                  <li>
+                    <DrawerItem
+                      itemName={"Add Post"}
+                      pathName={"/dashboard/addpost"}
+                    />
+                  </li>
+                  <li>
+                    <DrawerItem
+                      itemName={"My Posts"}
+                      pathName={"/dashboard/myposts"}
+                    />
+                  </li>
+                </>
+              )}
               {/* admin routes */}
-              <li>
-                <DrawerItem
-                  itemName={"Admin Profile"}
-                  pathName={"/dashboard/adminprofile"}
-                />
-              </li>
-              <li>
-                <DrawerItem
-                  itemName={"Manage Users"}
-                  pathName={"/dashboard/manageusers"}
-                />
-              </li>
-              <li>
-                <DrawerItem
-                  itemName={"Reported Comments"}
-                  pathName={"/dashboard/reportedcomments"}
-                />
-              </li>
-              <li>
-                <DrawerItem
-                  itemName={"Make Announcement"}
-                  pathName={"/dashboard/makeannouncement"}
-                />
-              </li>
+              {isAdmin && (
+                <>
+                  {" "}
+                  <li>
+                    <DrawerItem
+                      itemName={"Admin Profile"}
+                      pathName={"/dashboard/adminprofile"}
+                    />
+                  </li>
+                  <li>
+                    <DrawerItem
+                      itemName={"Manage Users"}
+                      pathName={"/dashboard/manageusers"}
+                    />
+                  </li>
+                  <li>
+                    <DrawerItem
+                      itemName={"Reported Comments"}
+                      pathName={"/dashboard/reportedcomments"}
+                    />
+                  </li>
+                  <li>
+                    <DrawerItem
+                      itemName={"Make Announcement"}
+                      pathName={"/dashboard/makeannouncement"}
+                    />
+                  </li>
+                </>
+              )}
               {/* common route */}
               <li>
                 <DrawerItem itemName={"Home"} pathName={"/"} />

@@ -8,6 +8,7 @@ const AdminRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const location = useLocation();
   const [isAdmin, isAdminLoading] = useAdmin();
+  // console.log( "is admin from useAdminroute" , isAdmin)
   if (loading || isAdminLoading) {
     return <Loader />;
   }

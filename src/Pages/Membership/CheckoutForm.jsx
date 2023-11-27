@@ -92,7 +92,7 @@ const CheckoutForm = ({ badgeDataRefetch }) => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Your work has been saved",
+          title: "Your role has been updated",
           showConfirmButton: false,
           timer: 1500,
         });

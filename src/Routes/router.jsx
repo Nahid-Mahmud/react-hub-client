@@ -16,6 +16,7 @@ import ManageUsers from "../Pages/DashboardPages/ManageUsers/ManageUsers";
 import ReportedComments from "../Pages/DashboardPages/ReportedComments/ReportedComments";
 import MakeAnnouncement from "../Pages/DashboardPages/MakeSnnouncement/MakeAnnouncement";
 import PostRelatedCommentDashboard from "../Pages/DashboardPages/MyPosts/PostRelatedCommentDashboard";
+import AdminRoute from "../PrivateRoute/AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -80,7 +81,11 @@ const router = createBrowserRouter([
       },
       {
         path: "reportedcomments",
-        element: <ReportedComments />,
+        element: (
+          <AdminRoute>
+            <ReportedComments />
+          </AdminRoute>
+        ),
       },
       {
         path: "makeannouncement",
