@@ -18,9 +18,9 @@ const PostDeatil = () => {
   const postData = useLoaderData();
   // Limited comment for bronze user
   const [isUserBadge, isUserBadgeLoading] = useUserBadge();
-  console.log('comment count', commentCount)
+  console.log("comment count", commentCount);
   const userCommentLimit = commentCount >= 5 && isUserBadge === "bronze";
-  console.log("userCommentLimit",userCommentLimit)
+  console.log("userCommentLimit", userCommentLimit);
   const {
     _id,
     authorName,
@@ -39,7 +39,7 @@ const PostDeatil = () => {
 
   useEffect(() => {
     axiosPublic.get(`/comments/${user?.email}`).then((res) => {
-      console.log( "Total user comment =", res.data?.totalUserComments);
+      console.log("Total user comment =", res.data?.totalUserComments);
       return setCommentCount(res.data?.totalUserComments || 0);
     });
   }, [user?.email, axiosPublic]);
@@ -115,6 +115,7 @@ const PostDeatil = () => {
       postTitle: postTitle,
       comments: comments,
       email: user?.email,
+      postId: _id,
     };
     axiosSecure.post(`/comments`, postCommentData).then((res) => {
       console.log(res.data);
@@ -182,10 +183,12 @@ const PostDeatil = () => {
               {" "}
               User Must Login to comment.{" "}
             </p>
+          ) : userCommentLimit ? (
+            <p className="text-xl text-red-500 my-3">
+              Genarel User can comment only 3 times. Become a Gold Menber to
+              comment more.
+            </p>
           ) : (
-
-            userCommentLimit ? <p className="text-xl text-red-500 my-3">Genarel User can comment only 3 times. Become a Gold Menber to comment more.</p>:
-
             <input
               type="submit"
               value="Post Comment"

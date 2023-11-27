@@ -3,13 +3,29 @@ import { useAuth } from "../../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import useUserIndivisualCreatedPosts from "../../../Hooks/useUserIndivisualCreatedPosts";
+import useUserBadge from "../../../Hooks/useUserBadge";
 
 const AddPosts = () => {
   // axios instance
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
-  //   const { user } = useAuth();
-  // get tags
+
+  // get user data
+  const {
+    userIndivisualPostData,
+    userPostCount,
+    userPostDataLoading,
+    userPostDataRefetch,
+  } = useUserIndivisualCreatedPosts();
+  // get usre badge Data
+
+  const [isUserBadge, isUserBadgeLoading, badgeDataRefetch] = useUserBadge();
+
+  const userPostLimit = userPostCount >= 5 && isUserBadge === "bronze";
+  // console.log(userPostLimit, userPostCount,userIndivisualPostData);
+
   const { data: tags = [], isLoading: tagsLoading } = useQuery({
     queryKey: ["tagsInAddPost"],
     queryFn: async () => {
@@ -26,6 +42,8 @@ const AddPosts = () => {
   };
 
   //   console.log(tags[0].tag);
+
+  // checking for user badge
 
   const handleSubmitAssignment = (e) => {
     e.preventDefault();
@@ -55,6 +73,16 @@ const AddPosts = () => {
 
     axiosSecure.post("/posts", postInfo).then((res) => {
       console.log(res.data);
+      if (res.data.insertedId) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your post has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        userPostDataRefetch();
+      }
     });
 
     // console.log(value);
@@ -151,11 +179,19 @@ const AddPosts = () => {
               </div>
 
               <div className="flex items-center gap-3 justify-between">
-                <input
-                  className="btn bg-green-600 text-white hover:text-black hover:bg-green-500 transition"
-                  type="submit"
-                  value="Submit"
-                />
+                {userPostLimit ? (
+                  <p className="">
+                    {" "}
+                    Bronze user can create post upto 5! Become a member to
+                    create unlimited posts and comments!{" "}
+                  </p>
+                ) : (
+                  <input
+                    className="btn bg-green-600 text-white hover:text-black hover:bg-green-500 transition"
+                    type="submit"
+                    value="Submit"
+                  />
+                )}
               </div>
             </form>
           </div>

@@ -13,7 +13,7 @@ const DashboardLayout = () => {
               htmlFor="my-drawer-2"
               className=" drawer-button lg:hidden mb-5"
             >
-              <FaBars className="text-3xl" />
+              <FaBars className="text-3xl cursor-pointer" />
             </label>
             {/* Page content here */}
 

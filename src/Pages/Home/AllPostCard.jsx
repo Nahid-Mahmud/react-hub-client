@@ -28,7 +28,7 @@ const AllPostCard = ({ post }) => {
   //   console.log(allCommentsData);
 
   const totalComments = allCommentsData.filter(
-    (comment) => comment.postTitle === postTitle
+    (comment) => comment.postId === _id
   );
   //   console.log(totalComments);
 

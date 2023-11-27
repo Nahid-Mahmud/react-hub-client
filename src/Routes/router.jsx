@@ -15,6 +15,7 @@ import AdminProfile from "../Pages/DashboardPages/AdminProfile/AdminProfile";
 import ManageUsers from "../Pages/DashboardPages/ManageUsers/ManageUsers";
 import ReportedComments from "../Pages/DashboardPages/ReportedComments/ReportedComments";
 import MakeAnnouncement from "../Pages/DashboardPages/MakeSnnouncement/MakeAnnouncement";
+import PostRelatedCommentDashboard from "../Pages/DashboardPages/MyPosts/PostRelatedCommentDashboard";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +62,12 @@ const router = createBrowserRouter([
       {
         path: "myposts",
         element: <MyPosts />,
+      },
+      {
+        element: <PostRelatedCommentDashboard />,
+        path: `post/dashboard/:id`,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_baseUrl}/posts/${params.id}`),
       },
       // admin routes
       {
