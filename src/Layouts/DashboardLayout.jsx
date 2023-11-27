@@ -4,9 +4,11 @@ import { FaBars } from "react-icons/fa6";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import useAdmin from "../Hooks/useAdmin";
+import { useAuth } from "../Hooks/useAuth";
 
 const DashboardLayout = () => {
   const [isAdmin, isAdminLoading] = useAdmin();
+  const { user } = useAuth();
   console.log("User Is admin?", isAdmin);
   return (
     <div>
@@ -34,7 +36,7 @@ const DashboardLayout = () => {
             <ul className="menu p-4 w-80 min-h-full bg-base-200 space-y-3 text-base-content">
               {/* Sidebar content here */}
               {/* genarel user links */}
-              {!isAdmin && (
+              {!isAdmin && user && (
                 <>
                   <li>
                     <DrawerItem
@@ -57,7 +59,7 @@ const DashboardLayout = () => {
                 </>
               )}
               {/* admin routes */}
-              {isAdmin && (
+              {isAdmin && user && (
                 <>
                   {" "}
                   <li>
