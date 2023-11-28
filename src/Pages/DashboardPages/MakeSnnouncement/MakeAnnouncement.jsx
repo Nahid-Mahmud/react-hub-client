@@ -55,7 +55,7 @@ const MakeAnnouncement = () => {
               Create an Announcement
             </h2>
             <form onSubmit={handleAnnoutcementSubmit} className="pb-6">
-              <div className="flex justify-between">
+              <div className="flex justify-between md:flex-row flex-col">
                 <div className="flex my-2 items-center gap-2">
                   <div className="avatar">
                     <div className="w-12 rounded-full">
