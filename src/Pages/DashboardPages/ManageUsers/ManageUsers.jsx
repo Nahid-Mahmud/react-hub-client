@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useAuth } from "../../../Hooks/useAuth";
 import useAdmin from "../../../Hooks/useAdmin";

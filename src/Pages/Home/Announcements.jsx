@@ -4,11 +4,12 @@ import Loader from "../../Shared/Loader";
 const Announcements = () => {
   const [announcementsData, isAnnounceMentLoading, announcementRefetch] =
     useAnnouncements();
+  const isExistAnnouncement = announcementsData.length > 0;
   // console.log(announcementsData);
   if (isAnnounceMentLoading) {
     return <Loader />;
   }
-  return (
+  return isExistAnnouncement ? (
     <div className="max-w-[90rem] mx-auto pb-10 mb-5">
       {/* card starts here */}
       <p className="text-center font-bold text-3xl mb-10 underline">
@@ -39,10 +40,11 @@ const Announcements = () => {
               </div>
             </div>
           ))}
-         
       </div>
       <hr />
     </div>
+  ) : (
+    ""
   );
 };
 
