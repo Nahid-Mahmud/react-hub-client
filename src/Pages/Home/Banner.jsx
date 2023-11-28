@@ -6,7 +6,7 @@ import useAxiosPublic from "../../Hooks/useAxiosPublic";
 const Banner = ({ handleSearch, setSearch }) => {
   const axiosPublic = useAxiosPublic();
 
-  const { data: tags=[], isLoading: tagsLoading } = useQuery({
+  const { data: tags = [], isLoading: tagsLoading } = useQuery({
     queryKey: ["tags"],
     queryFn: async () => {
       const res = await axiosPublic.get("/tags");
@@ -45,7 +45,7 @@ const Banner = ({ handleSearch, setSearch }) => {
             />
             <button
               onClick={handleSearch}
-              className="md:p-[0.75rem] bg-blue-600 rounded-r-lg "
+              className="md:p-[0.75rem] min-h-[3rem] bg-blue-600 rounded-r-lg "
             >
               Search
             </button>
