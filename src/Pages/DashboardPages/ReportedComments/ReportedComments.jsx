@@ -1,25 +1,33 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useAdmin from "../../../Hooks/useAdmin";
 import { useAuth } from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useStatitics from "../../../Hooks/useStatitics";
 
 const ReportedComments = () => {
+  const [currentPage, setCurrentPage] = useState(0);
+  const { staticticsData } = useStatitics();
+  console.log(staticticsData);
   const [isAdmin, isAdminLoading] = useAdmin();
   const axiosSecure = useAxiosSecure();
   const { user, loading } = useAuth();
   console.log("isAdmin form ReportedComments", isAdmin);
-  const { data: reportedCommentsByUsers, refetch: reportedCommentsRefetch } =
-    useQuery({
-      queryKey: ["get Reported Comments"],
-      enabled: !loading && isAdmin,
-      queryFn: async () => {
-        const res = await axiosSecure.get(`/comments/status/reported`);
-        //   console.log(res.data);
-        return res.data;
-      },
-    });
+  const {
+    data: reportedCommentsByUsers = [],
+    refetch: reportedCommentsRefetch,
+  } = useQuery({
+    queryKey: ["get Reported Comments"],
+    enabled: !loading && isAdmin,
+    queryFn: async () => {
+      const res = await axiosSecure.get(
+        `/comments/status/reported?page=${currentPage}`
+      );
+      //   console.log(res.data);
+      return res.data;
+    },
+  });
 
   const handleDeleteComment = (id) => {
     console.log(id);
@@ -54,6 +62,25 @@ const ReportedComments = () => {
     });
   };
 
+  // pagination
+  const itemPerPage = 10;
+  const numberOfpages = Math.ceil(
+    staticticsData?.reportedCommentsCount / itemPerPage
+  );
+  let pages = [];
+
+  if (numberOfpages) {
+    pages = [...Array(numberOfpages).keys()];
+  }
+
+  const handleCurrentPage = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  useEffect(() => {
+    reportedCommentsRefetch();
+  }, [reportedCommentsRefetch, currentPage]);
+
   return (
     <>
       <div className="text-center text-2xl font-bold">Reported Comments</div>
@@ -76,7 +103,7 @@ const ReportedComments = () => {
             <tbody>
               {reportedCommentsByUsers?.map((comment, index) => {
                 //
-                console.log(comment);
+                // console.log(comment);
                 const { email, _id, postId, postTitle, report, reportedBy } =
                   comment;
                 return (
@@ -111,6 +138,46 @@ const ReportedComments = () => {
               })}
             </tbody>
           </table>
+        </div>
+        <div className="text-center my-10 space-x-2">
+          {/* Previous button */}
+          <button
+            className="btn"
+            onClick={() =>
+              currentPage > 0
+                ? setCurrentPage(currentPage - 1)
+                : setCurrentPage(currentPage)
+            }
+          >
+            Previous
+          </button>
+          {pages.map((pageNumber, index) => {
+            return (
+              <button
+                className={` btn ${
+                  currentPage === pageNumber ? "bg-[#ff4e59]" : ""
+                } `}
+                onClick={() => {
+                  handleCurrentPage(pageNumber);
+                }}
+                key={index}
+              >
+                {pageNumber + 1}
+              </button>
+            );
+          })}
+          {/* Next Button */}
+
+          <button
+            onClick={() =>
+              currentPage < numberOfpages - 1
+                ? setCurrentPage(currentPage + 1)
+                : setCurrentPage(currentPage)
+            }
+            className="btn"
+          >
+            Next
+          </button>
         </div>
       </div>
     </>

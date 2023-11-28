@@ -3,21 +3,43 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useAuth } from "../../../Hooks/useAuth";
 import useAdmin from "../../../Hooks/useAdmin";
 import Swal from "sweetalert2";
+import { useEffect, useState } from "react";
+import useStatitics from "../../../Hooks/useStatitics";
 
 const ManageUsers = () => {
+  const [currentPage, setCurrentPage] = useState(0);
+  const { staticticsData } = useStatitics();
+  console.log(staticticsData);
   const axiosSecure = useAxiosSecure();
   const [isAdmin, isAdminLoading] = useAdmin();
   console.log("IS admin status", isAdmin);
   const { user, loading } = useAuth();
-  const { data: usersData, refetch: userDataRefetch } = useQuery({
+  const {
+    data: usersData = [],
+    refetch: userDataRefetch,
+    isLoading: userDataLoading,
+  } = useQuery({
     queryKey: ["getAllUsers"],
     enabled: !loading && isAdmin,
     queryFn: async () => {
-      const res = await axiosSecure.get(`/users/admin/${user?.email}`);
+      const res = await axiosSecure.get(
+        `/users/admin/${user?.email}?page=${currentPage}`
+      );
       //   console.log(res.data);
       return res.data;
     },
   });
+
+  // paginaation
+
+  const itemPerPage = 10;
+  const numberOfpages = Math.ceil(staticticsData?.totalUsers / itemPerPage);
+  let pages = [];
+
+  if (numberOfpages) {
+    pages = [...Array(numberOfpages).keys()];
+  }
+
   //   console.log("Users data", usersData);
 
   // update use role
@@ -56,6 +78,18 @@ const ManageUsers = () => {
     console.log(name);
   };
 
+  const handleCurrentPage = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  useEffect(() => {
+    userDataRefetch();
+  }, [userDataRefetch, currentPage]);
+
+  if (userDataLoading) {
+    return <div className="text-center">Loading...</div>;
+  }
+
   return (
     <div>
       <p className="text-center font-bold text-2xl underline mb-3">
@@ -78,7 +112,7 @@ const ManageUsers = () => {
             <tbody>
               {/* row 1 */}
               {usersData?.map((indivisualuser, index) => {
-                console.log(`user no ${index + 1}`, indivisualuser);
+                // console.log(`user no ${index + 1}`, indivisualuser);
 
                 const { name, email: userEmail, role, badge } = indivisualuser;
 
@@ -102,6 +136,46 @@ const ManageUsers = () => {
               })}
             </tbody>
           </table>
+          <div className="text-center my-10 space-x-2">
+            {/* Previous button */}
+            <button
+              className="btn"
+              onClick={() =>
+                currentPage > 0
+                  ? setCurrentPage(currentPage - 1)
+                  : setCurrentPage(currentPage)
+              }
+            >
+              Previous
+            </button>
+            {pages.map((pageNumber, index) => {
+              return (
+                <button
+                  className={` btn ${
+                    currentPage === pageNumber ? "bg-[#ff4e59]" : ""
+                  } `}
+                  onClick={() => {
+                    handleCurrentPage(pageNumber);
+                  }}
+                  key={index}
+                >
+                  {pageNumber + 1}
+                </button>
+              );
+            })}
+            {/* Next Button */}
+
+            <button
+              onClick={() =>
+                currentPage < numberOfpages - 1
+                  ? setCurrentPage(currentPage + 1)
+                  : setCurrentPage(currentPage)
+              }
+              className="btn"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </div>

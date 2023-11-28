@@ -18,9 +18,9 @@ const MyProfile = () => {
   const { user, loading } = useAuth();
   const [isUserBadge, isUserBadgeLoading, badgeDataRefetch] = useUserBadge();
 
-//   console.log("Firebase USer", user, userIndivisualPostData);
+  //   console.log("Firebase USer", user, userIndivisualPostData);
   const recentUserPost = userIndivisualPostData?.slice(0, 3);
-//   console.log("recent 3 post", recentUserPost);
+  //   console.log("recent 3 post", recentUserPost);
 
   console.log(isUserBadge);
   return (
@@ -78,13 +78,21 @@ const MyProfile = () => {
           </div>
         </div>
       </div>
-      <p className="text-2xl font-bold underline text-center">Recent Posts</p>
+      {recentUserPost.length > 0 ? (
+        <p className="text-2xl font-bold underline text-center">Recent Posts</p>
+      ) : (
+        <p className="text-2xl font-bold underline text-center">
+          {" "}
+          No Recent Posts Found
+        </p>
+      )}
+
       <div>
-      <div className="grid max-w-[95vw] mx-auto mb-10  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {recentUserPost.map((post, index) => (
-          <RecentPostCards key={index}  post={post} />
-        ))}
-      </div>
+        <div className="grid max-w-[95vw] mx-auto mb-10  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {recentUserPost.map((post, index) => (
+            <RecentPostCards key={index} post={post} />
+          ))}
+        </div>
       </div>
     </div>
   );
