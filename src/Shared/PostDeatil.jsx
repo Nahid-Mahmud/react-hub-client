@@ -55,7 +55,22 @@ const PostDeatil = () => {
   const downVoteDifference = downvote - downVoteCount;
 
   const handleUpvote = () => {
+    if (upVoteDifference >= 1) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "You can only vote once",
+      });
+      return;
+    }
     if (downVoteDifference > 0) {
+      setDownvote(downvote - 1);
+    }
+
+    setUpvote(upvote + 1);
+  };
+  const handleDownvote = () => {
+    if (downVoteDifference >= 1) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -64,37 +79,13 @@ const PostDeatil = () => {
       return;
     }
     if (upVoteDifference > 0) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "You can Only vote once",
-      });
-      return;
-    }
-    setUpvote(upvote + 1);
-  };
-  const handleDownvote = () => {
-    if (upVoteDifference > 0) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "You can Only vote once",
-      });
-      return;
-    }
-    if (downVoteDifference > 0) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "You can Only vote once",
-      });
-      return;
+      setUpvote(upvote - 1);
     }
 
     setDownvote(downvote + 1);
   };
 
-  console.log(upvote, downvote);
+  console.log("upvode =", upvote, ",Downvte ", downvote);
 
   const handleSubmit = (e) => {
     e.preventDefault();
