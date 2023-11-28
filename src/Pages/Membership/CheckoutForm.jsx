@@ -22,7 +22,7 @@ const CheckoutForm = ({ badgeDataRefetch }) => {
 
   useEffect(() => {
     axiosSecure.get("/create-payment-intent").then((res) => {
-      console.log(res.data.clientSecret);
+      // console.log(res.data.clientSecret);
       setClientSecret(res.data.clientSecret);
     });
   }, [axiosSecure]);
@@ -70,18 +70,18 @@ const CheckoutForm = ({ badgeDataRefetch }) => {
       });
 
     if (confirmError) {
-      console.log("Confirm error", confirmError);
+      // console.log("Confirm error", confirmError);
     } else {
       if (paymentIntent.status === "succeeded") {
         // change user role to gold
-        console.log("Payment Id", paymentIntent?.id);
+        // console.log("Payment Id", paymentIntent?.id);
         axiosSecure
           .put(`/user/role/${user?.email}`, {
             badge: "gold",
             paymentId: paymentIntent?.id,
           })
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data.modifiedCount > 0) {
                 badgeDataRefetch();
             }
@@ -99,7 +99,7 @@ const CheckoutForm = ({ badgeDataRefetch }) => {
       }
     }
 
-    console.log("clicked");
+    // console.log("clicked");
   };
 
   return (

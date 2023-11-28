@@ -27,11 +27,25 @@ const SignUp = () => {
   // handle on submint
 
   const onSubmit = (formData) => {
+    setSignInUpErr("");
     const name = formData.name;
     const email = formData.email;
     const password = formData.password;
     const photourl = formData.photourl;
     const badge = "bronze";
+
+    // password validation
+
+    if (!/^.{6,}$/.test(password)) {
+      setSignInUpErr(`Must have at least 6 characters`);
+      return;
+    } else if (!/^(?=.*[A-Z]).+$/.test(password)) {
+      setSignInUpErr(`Must have at least 1 capital letter`);
+      return;
+    } else if (!/^(?=.*[!@#$%^&*()_+{}[\]:;<>,.?/~])\S+$/.test(password)) {
+      setSignInUpErr(`Must have at least 1 special character`);
+      return;
+    }
 
     // email bassword login
     emailPassSignup(email, password)
@@ -53,14 +67,14 @@ const SignUp = () => {
             axiosPublic.post("/users", userInfo).then((res) => {
               console.log("User created SUccerss", res.data);
               if (res.data.insertedId) {
-                Swal.fire({
-                  position: "top-end",
-                  icon: "success",
-                  title: "User created successfully.",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-                navigate("/");
+                // Swal.fire({
+                //   position: "top-end",
+                //   icon: "success",
+                //   title: "User created successfully.",
+                //   showConfirmButton: false,
+                //   timer: 1500,
+                // });
+                // navigate("/");
               }
             });
           })
