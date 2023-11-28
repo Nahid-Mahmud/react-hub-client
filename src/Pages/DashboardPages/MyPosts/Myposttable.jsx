@@ -13,18 +13,7 @@ const Myposttable = ({ post, index, userPostDataRefetch }) => {
 
   const { _id, postTitle, downVoteCount, upVoteCount } = post;
 
-  //   const { data: allCommentsData = [], isLoading } = useQuery({
-  //     queryKey: ["commentsForTable"],
-  //     queryFn: async () => {
-  //       const res = await axiosPublic.get(`/comments`);
-  //       return res.data;
-  //     },
-  //   });
-  //   //   console.log(allCommentsData);
 
-  //   const totalComments = allCommentsData.filter(
-  //     (comment) => comment.postId === _id
-  //   );
 
   const handleDelete = async (id) => {
     console.log(id);

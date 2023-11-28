@@ -29,12 +29,13 @@ import MailIcon from "@mui/icons-material/Mail";
 import useAnnouncements from "../Hooks/useAnnouncements";
 import useAdmin from "../Hooks/useAdmin";
 import useUserBadge from "../Hooks/useUserBadge";
+import Swal from "sweetalert2";
 
 const NavBar = () => {
   const { user, signoutUser } = useAuth();
   const [isAdmin] = useAdmin();
   const [isUserBadge, isUserBadgeLoading] = useUserBadge();
-  console.log( "isUserBadge", isUserBadge);
+  console.log("isUserBadge", isUserBadge);
   console.log("isAdmin", isAdmin);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -72,6 +73,13 @@ const NavBar = () => {
     console.log("logout");
     signoutUser()
       .then(() => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "User Logout Success!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         console.log("signout user successfully");
       })
       .catch((err) => {

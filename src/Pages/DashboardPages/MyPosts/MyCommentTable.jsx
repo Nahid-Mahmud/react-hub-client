@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useAuth } from "../../../Hooks/useAuth";
 
 const MyCommentTable = ({
   comment,
@@ -12,6 +13,8 @@ const MyCommentTable = ({
   handleShowMore,
 }) => {
   const axiosSecure = useAxiosSecure();
+
+  const { user } = useAuth();
   // console.log(comment);
 
   const { comments, _id, email, postTitle, report } = comment;
@@ -46,6 +49,7 @@ const MyCommentTable = ({
     // post report data to database
     const reportData = {
       report: value,
+      reportedBy: user?.email,
     };
 
     axiosSecure.put(`/comments/report/${_id}`, reportData).then((res) => {

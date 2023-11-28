@@ -3,6 +3,7 @@ import { useAuth } from "../Hooks/useAuth";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const GoogleLogin = ({ text, setSignInUpErr }) => {
   const navigate = useNavigate();
@@ -13,6 +14,16 @@ const GoogleLogin = ({ text, setSignInUpErr }) => {
     setSignInUpErr("");
     googleLogIn()
       .then((result) => {
+        if (result) {
+          console.log("user found");
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "User Log In successFull",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
         // console.log(result.user);
         const badge = "bronze";
         const userInfo = {
@@ -26,18 +37,9 @@ const GoogleLogin = ({ text, setSignInUpErr }) => {
           if (res.data.insertedId > 0) {
             console.log("user created successfully");
           }
-          toast(" Sign In Successfull", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-          navigate(location.state ? location.state : "/");
         });
+
+        navigate(location.state ? location.state : "/");
       })
       .catch((err) => {
         console.log(err.message);
