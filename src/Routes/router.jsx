@@ -16,6 +16,7 @@ import MakeAnnouncement from "../Pages/DashboardPages/MakeSnnouncement/MakeAnnou
 import PostRelatedCommentDashboard from "../Pages/DashboardPages/MyPosts/PostRelatedCommentDashboard";
 import AdminRoute from "../PrivateRoute/AdminRoute";
 import WelcomePage from "../Pages/DashboardPages/WelcomePage/WelcomePage";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -53,18 +54,34 @@ const router = createBrowserRouter([
       // normal user routes
       {
         path: "myprofile",
-        element: <MyProfile />,
+        element: (
+          <PrivateRoute>
+            <MyProfile />
+          </PrivateRoute>
+        ),
       },
       {
         path: "addpost",
-        element: <AddPosts />,
+        element: (
+          <PrivateRoute>
+            <AddPosts />
+          </PrivateRoute>
+        ),
       },
       {
         path: "myposts",
-        element: <MyPosts />,
+        element: (
+          <PrivateRoute>
+            <MyPosts />
+          </PrivateRoute>
+        ),
       },
       {
-        element: <PostRelatedCommentDashboard />,
+        element: (
+          <PrivateRoute>
+            <PostRelatedCommentDashboard />
+          </PrivateRoute>
+        ),
         path: `post/dashboard/:id`,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_baseUrl}/posts/${params.id}`),
@@ -72,11 +89,19 @@ const router = createBrowserRouter([
       // admin routes
       {
         path: "adminprofile",
-        element: <AdminProfile />,
+        element: (
+          <AdminRoute>
+            <AdminProfile />
+          </AdminRoute>
+        ),
       },
       {
         path: "manageusers",
-        element: <ManageUsers />,
+        element: (
+          <AdminRoute>
+            <ManageUsers />
+          </AdminRoute>
+        ),
       },
       {
         path: "reportedcomments",
@@ -88,10 +113,19 @@ const router = createBrowserRouter([
       },
       {
         path: "makeannouncement",
-        element: <MakeAnnouncement />,
+        element: (
+          <AdminRoute>
+            {" "}
+            <MakeAnnouncement />
+          </AdminRoute>
+        ),
       },
       {
-        element: <WelcomePage />,
+        element: (
+          <PrivateRoute>
+            <WelcomePage />
+          </PrivateRoute>
+        ),
         index: true,
       },
     ],
