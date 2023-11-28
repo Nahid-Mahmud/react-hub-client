@@ -9,10 +9,10 @@ import useStatitics from "../../../Hooks/useStatitics";
 const ManageUsers = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const { staticticsData } = useStatitics();
-  console.log(staticticsData);
+  // console.log(staticticsData);
   const axiosSecure = useAxiosSecure();
   const [isAdmin, isAdminLoading] = useAdmin();
-  console.log("IS admin status", isAdmin);
+  // console.log("IS admin status", isAdmin);
   const { user, loading } = useAuth();
   const {
     data: usersData = [],
@@ -57,7 +57,7 @@ const ManageUsers = () => {
         axiosSecure
           .put(`/user/updaterole/${user?.email}`, { role: "admin", name: name })
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             if (res.data?.modifiedCount > 0) {
               Swal.fire({
                 title: "Success!",
@@ -75,7 +75,7 @@ const ManageUsers = () => {
           });
       }
     });
-    console.log(name);
+    // console.log(name);
   };
 
   const handleCurrentPage = (pageNumber) => {

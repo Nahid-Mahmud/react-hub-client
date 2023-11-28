@@ -11,7 +11,7 @@ const MyPosts = () => {
   const axiosSecure = useAxiosSecure();
   const [currentPage, setCurrentPage] = useState(0);
   const { staticticsData } = useStatitics();
-  console.log(staticticsData);
+  // console.log(staticticsData);
 
   const { data = [], refetch } = useQuery({
     queryKey: ["indPost"],

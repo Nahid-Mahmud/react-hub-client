@@ -67,7 +67,7 @@ const AuthProvider = ({ children }) => {
         localStorage.removeItem("token");
       }
 
-      console.log("user Form authProvider observer", currentUser);
+      // console.log("user Form authProvider observer", currentUser);
     });
 
     return () => {

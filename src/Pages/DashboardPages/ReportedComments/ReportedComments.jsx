@@ -9,11 +9,11 @@ import useStatitics from "../../../Hooks/useStatitics";
 const ReportedComments = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const { staticticsData } = useStatitics();
-  console.log(staticticsData);
+  // console.log(staticticsData);
   const [isAdmin, isAdminLoading] = useAdmin();
   const axiosSecure = useAxiosSecure();
   const { user, loading } = useAuth();
-  console.log("isAdmin form ReportedComments", isAdmin);
+  // console.log("isAdmin form ReportedComments", isAdmin);
   const {
     data: reportedCommentsByUsers = [],
     refetch: reportedCommentsRefetch,
@@ -30,7 +30,7 @@ const ReportedComments = () => {
   });
 
   const handleDeleteComment = (id) => {
-    console.log(id);
+    // console.log(id);
     axiosSecure.delete(`/comments/delete/${id}`).then((res) => {
       console.log(res.data);
       if (res.data?.deletedCount > 0) {
@@ -46,9 +46,9 @@ const ReportedComments = () => {
     });
   };
   const handleRejectComment = (id) => {
-    console.log(id);
+    // console.log(id);
     axiosSecure.put(`/comments/report/remove/${id}`).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data?.modifiedCount > 0) {
         Swal.fire({
           position: "top-end",

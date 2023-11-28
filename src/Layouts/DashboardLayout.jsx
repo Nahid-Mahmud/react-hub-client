@@ -9,7 +9,7 @@ import { useAuth } from "../Hooks/useAuth";
 const DashboardLayout = () => {
   const [isAdmin, isAdminLoading] = useAdmin();
   const { user } = useAuth();
-  console.log("User Is admin?", isAdmin);
+  // console.log("User Is admin?", isAdmin);
   return (
     <div>
       <div>

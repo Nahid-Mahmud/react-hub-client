@@ -33,7 +33,7 @@ const PostRelatedCommentDashboard = () => {
   const mycomments = allCommentsData.filter(
     (comment) => comment.postId === _id
   );
-  console.log(mycomments);
+  // console.log(mycomments);
 
   // console.log(postData);
   return (

@@ -18,7 +18,7 @@ const PostDeatil = () => {
   const postData = useLoaderData();
   // Limited comment for bronze user
   const [isUserBadge, isUserBadgeLoading] = useUserBadge();
-  console.log("comment count", commentCount);
+  // console.log("comment count", commentCount);
   // const userCommentLimit = commentCount >= 5 && isUserBadge === "bronze";
   // console.log("userCommentLimit", userCommentLimit);
   const {
@@ -33,13 +33,13 @@ const PostDeatil = () => {
     upVoteCount,
     downVoteCount,
   } = postData;
-  console.log(postData);
+  // console.log(postData);
 
   // get user comment count
 
   useEffect(() => {
     axiosPublic.get(`/comments/${user?.email}`).then((res) => {
-      console.log("Total user comment =", res.data?.totalUserComments);
+      // console.log("Total user comment =", res.data?.totalUserComments);
       return setCommentCount(res.data?.totalUserComments || 0);
     });
   }, [user?.email, axiosPublic]);
@@ -85,7 +85,7 @@ const PostDeatil = () => {
     setDownvote(downvote + 1);
   };
 
-  console.log("upvode =", upvote, ",Downvte ", downvote);
+  // console.log("upvode =", upvote, ",Downvte ", downvote);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -97,7 +97,7 @@ const PostDeatil = () => {
       };
 
       axiosSecure.put(`/posts/${_id}`, postVoteData).then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
       });
     }
 
@@ -109,7 +109,7 @@ const PostDeatil = () => {
       postId: _id,
     };
     axiosSecure.post(`/comments`, postCommentData).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.insertedId) {
         Swal.fire({
           icon: "success",
@@ -119,7 +119,7 @@ const PostDeatil = () => {
         navigate("/");
       }
     });
-    console.log(`submit button is working`, comments);
+    // console.log(`submit button is working`, comments);
   };
 
   return (

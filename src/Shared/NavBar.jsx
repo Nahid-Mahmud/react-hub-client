@@ -35,8 +35,8 @@ const NavBar = () => {
   const { user, signoutUser } = useAuth();
   const [isAdmin] = useAdmin();
   const [isUserBadge, isUserBadgeLoading] = useUserBadge();
-  console.log("isUserBadge", isUserBadge);
-  console.log("isAdmin", isAdmin);
+  // console.log("isUserBadge", isUserBadge);
+  // console.log("isAdmin", isAdmin);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -70,7 +70,7 @@ const NavBar = () => {
 
   // logout function
   const handleLogout = () => {
-    console.log("logout");
+    // console.log("logout");
     signoutUser()
       .then(() => {
         Swal.fire({
@@ -80,10 +80,10 @@ const NavBar = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        console.log("signout user successfully");
+        // console.log("signout user successfully");
       })
       .catch((err) => {
-        console.log("signout user error", err.message);
+        // console.log("signout user error", err.message);
       });
   };
 

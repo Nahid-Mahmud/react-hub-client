@@ -16,7 +16,7 @@ const useUserBadge = () => {
     enabled: !loading,
     queryFn: async () => {
       const res = await axiosSecure.get(`/user/${user.email}`);
-      console.log( "Databse User data", res.data);
+      // console.log( "Databse User data", res.data);
       setDbUser(res.data);
       return res.data?.badge;
     },

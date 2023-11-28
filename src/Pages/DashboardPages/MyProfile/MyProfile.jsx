@@ -22,7 +22,7 @@ const MyProfile = () => {
   const recentUserPost = userIndivisualPostData?.slice(0, 3);
   //   console.log("recent 3 post", recentUserPost);
 
-  console.log(isUserBadge);
+  // console.log(isUserBadge);
   return (
     <div>
       <div className=" lg:max-w-[30vw] mx-auto mb-10  md:grid-cols-2 lg:grid-cols-3 gap-10">

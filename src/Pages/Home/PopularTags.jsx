@@ -11,7 +11,7 @@ const PopularTags = () => {
       return res.data;
     },
   });
-  console.log("tags Loading", tagsLoading);
+  // console.log("tags Loading", tagsLoading);
   if (tagsLoading) return <Loader />;
   return (
     <div className="max-w-[90rem] pb-10 mx-auto">
