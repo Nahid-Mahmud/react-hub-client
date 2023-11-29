@@ -1,5 +1,6 @@
 import React from "react";
 import useAdmin from "../../../Hooks/useAdmin";
+import { Helmet } from "react-helmet-async";
 
 const WelcomePage = () => {
   const [isAdmin, isAdminLoading] = useAdmin();
@@ -12,6 +13,9 @@ const WelcomePage = () => {
         </p>
       )}
       {!isAdmin && <p>See your profile, add post and many more.... </p>}
+      <Helmet>
+        <title>Welcome - ReactHub </title>
+      </Helmet>
     </div>
   );
 };

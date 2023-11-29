@@ -2,6 +2,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
 import useUserBadge from "../../Hooks/useUserBadge";
+import { Helmet } from "react-helmet-async";
 
 // stripe promise
 const stripePromise = loadStripe(import.meta.env.VITE_PUBLIC_PAYMENT_KEY);
@@ -38,6 +39,9 @@ const Membership = () => {
           </Elements>
         </div>
       )}
+      <Helmet>
+        <title>Membership - ReactHub </title>
+      </Helmet>
     </div>
   );
 };

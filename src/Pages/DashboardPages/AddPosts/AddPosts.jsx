@@ -6,6 +6,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useUserIndivisualCreatedPosts from "../../../Hooks/useUserIndivisualCreatedPosts";
 import useUserBadge from "../../../Hooks/useUserBadge";
+import { Helmet } from "react-helmet-async";
 
 const AddPosts = () => {
   // axios instance
@@ -198,6 +199,9 @@ const AddPosts = () => {
           </div>
         </div>
       </div>
+      <Helmet>
+        <title>Add Post - ReactHub </title>
+      </Helmet>
     </div>
   );
 };

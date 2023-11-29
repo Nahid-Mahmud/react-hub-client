@@ -5,6 +5,7 @@ import useAdmin from "../../../Hooks/useAdmin";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import useStatitics from "../../../Hooks/useStatitics";
+import { Helmet } from "react-helmet-async";
 
 const ManageUsers = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -178,6 +179,9 @@ const ManageUsers = () => {
           </div>
         </div>
       </div>
+      <Helmet>
+        <title>Manage Profiles - ReactHub </title>
+      </Helmet>
     </div>
   );
 };

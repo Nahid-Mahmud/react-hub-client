@@ -5,6 +5,7 @@ import { useAuth } from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useStatitics from "../../../Hooks/useStatitics";
+import { Helmet } from "react-helmet-async";
 
 const ReportedComments = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -180,6 +181,9 @@ const ReportedComments = () => {
           </button>
         </div>
       </div>
+      <Helmet>
+        <title>Reported Comments - ReactHub </title>
+      </Helmet>
     </>
   );
 };

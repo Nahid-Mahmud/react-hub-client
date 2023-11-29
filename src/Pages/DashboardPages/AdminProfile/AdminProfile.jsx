@@ -7,11 +7,12 @@ import { Box, Grid, Paper, TextField, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import PieChartAdmin from "./PieChartAdmin";
 import AddTagsAdmin from "./AddTagsAdmin";
+import { Helmet } from "react-helmet-async";
 
 const AdminProfile = () => {
   const [isAdmin, isAdminLoading] = useAdmin();
   const { user, loading } = useAuth();
-//   console.log(user);
+  //   console.log(user);
   const axiosSecure = useAxiosSecure();
 
   const { data } = useQuery({
@@ -19,15 +20,15 @@ const AdminProfile = () => {
     enabled: !loading && isAdmin,
     queryFn: async () => {
       const res = await axiosSecure.get(`/statistics`);
-    //   console.log(res.data);
+      //   console.log(res.data);
       return res.data;
     },
   });
-//   console.log(data);
+  //   console.log(data);
   const totalPosts = data?.totalPosts;
   const totalComments = data?.totalComments;
   const totalUsers = data?.totalUsers;
-//   console.log(totalPosts, totalComments, totalUsers);
+  //   console.log(totalPosts, totalComments, totalUsers);
 
   return (
     <>
@@ -126,6 +127,9 @@ const AdminProfile = () => {
         />
       </Box>
       <AddTagsAdmin />
+      <Helmet>
+        <title>Admin Profile - ReactHub </title>
+      </Helmet>
     </>
   );
 };

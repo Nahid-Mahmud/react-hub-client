@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import useAnnouncements from "../../../Hooks/useAnnouncements";
 import { useAuth } from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const MakeAnnouncement = () => {
   const axiosSecure = useAxiosSecure();
@@ -118,6 +119,9 @@ const MakeAnnouncement = () => {
           </div>
         </div>
       </div>
+      <Helmet>
+        <title>Make Announcement - ReactHub </title>
+      </Helmet>
     </div>
   );
 };

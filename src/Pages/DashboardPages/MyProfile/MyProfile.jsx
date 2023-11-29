@@ -7,6 +7,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useUserIndivisualCreatedPosts from "../../../Hooks/useUserIndivisualCreatedPosts";
 import AllPostCard from "../../Home/AllPostCard";
 import RecentPostCards from "./RecentPostCards";
+import { Helmet } from "react-helmet-async";
 
 const MyProfile = () => {
   const {
@@ -94,6 +95,9 @@ const MyProfile = () => {
           ))}
         </div>
       </div>
+      <Helmet>
+        <title>My Profile - ReactHub </title>
+      </Helmet>
     </div>
   );
 };

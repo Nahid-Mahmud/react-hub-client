@@ -5,6 +5,7 @@ import { useAuth } from "../../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useStatitics from "../../../Hooks/useStatitics";
+import { Helmet } from "react-helmet-async";
 
 const MyPosts = () => {
   const { user, loading } = useAuth();
@@ -115,6 +116,9 @@ const MyPosts = () => {
           Next
         </button>
       </div>
+      <Helmet>
+        <title>My Posts - ReactHub </title>
+      </Helmet>
     </div>
   );
 };
