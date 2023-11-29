@@ -6,6 +6,7 @@
 
 - Used Material Ui (Navbar,Footer and Admin Profile Only)
 - Used React Share
+- Used React Helmet Async
 - Created Admin and User dashbord with role spesific functionality
 - Sorted Post data by Date and Popularity count
 - Implemented Search fucntionality using tags (server)
