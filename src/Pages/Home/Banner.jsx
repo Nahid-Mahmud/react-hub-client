@@ -16,7 +16,7 @@ const Banner = ({ handleSearch, setSearch }) => {
 
   return (
     <div
-      className="hero my-10 min-h-[80vh]"
+      className="hero min-h-[80vh]"
       style={{
         backgroundImage: "url(https://i.ibb.co/MpcC28x/banner.jpg)",
       }}
