@@ -6,10 +6,8 @@ import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import useStatitics from "../../../Hooks/useStatitics";
 import { Helmet } from "react-helmet-async";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const ManageUsers = () => {
-  const axiosPublic = useAxiosPublic();
   const [currentPage, setCurrentPage] = useState(0);
   const { staticticsData } = useStatitics();
   // console.log(staticticsData);
@@ -95,6 +93,30 @@ const ManageUsers = () => {
 
   function handleDeleteUser(id) {
     // console.log(id)
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`user/delete/${id}`).then((res) => {
+          console.log(res.data);
+          if (res.data?.deletedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+            userDataRefetch();
+          }
+        });
+      }
+    });
   }
 
   return (
