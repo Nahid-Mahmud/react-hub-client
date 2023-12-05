@@ -6,8 +6,10 @@ import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import useStatitics from "../../../Hooks/useStatitics";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const ManageUsers = () => {
+  const axiosPublic = useAxiosPublic();
   const [currentPage, setCurrentPage] = useState(0);
   const { staticticsData } = useStatitics();
   // console.log(staticticsData);
@@ -91,6 +93,10 @@ const ManageUsers = () => {
     return <div className="text-center">Loading...</div>;
   }
 
+  function handleDeleteUser(id) {
+    // console.log(id)
+  }
+
   return (
     <div>
       <p className="text-center font-bold text-2xl underline mb-3">
@@ -106,8 +112,10 @@ const ManageUsers = () => {
                 <th>#</th>
                 <th>User Name</th>
                 <th>Email</th>
-                <th>Make Admin</th>
                 <th> Subscription </th>
+                <th>Make Admin</th>
+
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -122,16 +130,32 @@ const ManageUsers = () => {
                     <th>{index + 1}</th>
                     <td> {name}</td>
                     <td>{userEmail}</td>
+
+                    <td className="capitalize">{badge}</td>
+                    <td>
+                      {role === "admin" ? (
+                        <button disabled={true} className="btn">
+                          {" "}
+                          Admin{" "}
+                        </button>
+                      ) : (
+                        <button
+                          title={role}
+                          onClick={() => handleAdminButton(name)}
+                          className="btn bg-blue-600 text-slate-300 hover:bg-blue-900 hover:text-white"
+                        >
+                          Make <br /> Admin
+                        </button>
+                      )}
+                    </td>
                     <td>
                       <button
-                        title={role}
-                        onClick={() => handleAdminButton(name)}
-                        className="btn bg-blue-600 text-slate-300 hover:bg-blue-900 hover:text-white"
+                        onClick={() => handleDeleteUser(indivisualuser?._id)}
+                        className="btn btn-error"
                       >
-                        Make Admin
+                        Delete
                       </button>
                     </td>
-                    <td className="capitalize">{badge}</td>
                   </tr>
                 );
               })}
@@ -153,7 +177,7 @@ const ManageUsers = () => {
               return (
                 <button
                   className={` btn ${
-                    currentPage === pageNumber ? "bg-[#ff4e59]" : ""
+                    currentPage === pageNumber ? "bg-[#ffed4e]" : ""
                   } `}
                   onClick={() => {
                     handleCurrentPage(pageNumber);
