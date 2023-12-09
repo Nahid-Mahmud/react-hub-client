@@ -1,5 +1,5 @@
 # About
- ReactHub is a forum website using MERN stact. Users can create post,make comment, give vote and many more.
+ ReactHub is a forum website using MERN stact. Discover ReactHub, my MERN project, where online forums reach new heights through a responsive design ensuring seamless user experiences on desktops, tablets, and mobiles. Key features include an intuitive navbar, advanced search functionalities, and interactive post displays. Unlock premium features like a Gold badge and increased post limits with a membership managed through a user-centric Dashboard. Admins access a dedicated dashboard for streamlined user management and announcements. 
 
 
 # Project Features
