@@ -93,6 +93,8 @@ const ManageUsers = () => {
 
   function handleDeleteUser(id) {
     // console.log(id)
+    const userEmail = usersData?.find((user) => user._id === id)?.email;
+    console.log(userEmail);
 
     Swal.fire({
       title: "Are you sure?",
@@ -231,5 +233,5 @@ const ManageUsers = () => {
     </div>
   );
 };
-
+// new functioality added
 export default ManageUsers;
