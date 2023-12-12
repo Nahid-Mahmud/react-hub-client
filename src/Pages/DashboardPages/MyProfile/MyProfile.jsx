@@ -8,8 +8,10 @@ import useUserIndivisualCreatedPosts from "../../../Hooks/useUserIndivisualCreat
 import AllPostCard from "../../Home/AllPostCard";
 import RecentPostCards from "./RecentPostCards";
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 const MyProfile = () => {
+  const axiosSecure = useAxiosSecure();
   const {
     userIndivisualPostData,
     userPostCount,
@@ -17,13 +19,35 @@ const MyProfile = () => {
     userPostDataRefetch,
   } = useUserIndivisualCreatedPosts();
   const { user, loading } = useAuth();
-  const [isUserBadge, isUserBadgeLoading, badgeDataRefetch] = useUserBadge();
+  const [isUserBadge, isUserBadgeLoading, badgeDataRefetch, dbUser] =
+    useUserBadge();
 
   //   console.log("Firebase USer", user, userIndivisualPostData);
   const recentUserPost = userIndivisualPostData?.slice(0, 3);
   //   console.log("recent 3 post", recentUserPost);
 
-  // console.log(isUserBadge);
+  console.log(dbUser);
+
+  const handleInputBio = (e) => {
+    console.log(e);
+    e.preventDefault();
+    const userEmail = dbUser?.email;
+    const bio = e.target.bio.value;
+    console.log(userEmail, bio);
+    axiosSecure.put(`user/bio/${userEmail}`, { bio: bio }).then((res) => {
+      console.log(res.data);
+      if (res?.data?.modifiedCount > 0) {
+        //
+        Swal.fire({
+          title: "Success!",
+          text: "Bio Added SuccessFully",
+          icon: "success",
+        });
+        badgeDataRefetch();
+      }
+    });
+  };
+
   return (
     <div>
       <div className=" lg:max-w-[30vw] mx-auto mb-10  md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -75,6 +99,26 @@ const MyProfile = () => {
               <p className="text-lg max-w-[24rem] font-medium">
                 {/* {item?.title} */} Email: {user?.email}
               </p>
+              {/* about yourself bio */}
+              {dbUser?.bio ? (
+                <p> {dbUser?.bio} </p>
+              ) : (
+                <form onSubmit={handleInputBio} className="flex flex-col gap-4">
+                  <label> Add Bio </label>
+                  <input
+                    type="text"
+                    placeholder="Type here"
+                    name="bio"
+                    className="input input-bordered input-lg w-full max-w-xs"
+                  />
+                  <input
+                    className="btn w-fit"
+                    type="submit"
+                    value="Add"
+                    required
+                  />
+                </form>
+              )}
             </div>
           </div>
         </div>
