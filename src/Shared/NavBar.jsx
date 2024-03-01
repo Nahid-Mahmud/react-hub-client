@@ -1,72 +1,17 @@
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-// import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-// import AdbIcon from "@mui/icons-material/Adb";
-import NavItem from "./NavItem";
-import NavItemMobile from "./NavItemMobile";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import IconMenuItem from "./IconMenuItem";
-// import SearchIcon from "@mui/icons-material/Search";
-// import { Grid } from "@mui/material";
-// import SearchBox from "../Components/SearchBox/SearchBox";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-// import NotificationsIcon from "@mui/icons-material/Notifications";
-import { useAuth } from "../Hooks/useAuth";
-import { Badge } from "@mui/material";
-// const pages = ["Products", "Pricing", "Blog"];
-// const settings = ["Profile", "Account", "Dashboard", "Logout"];
-import MailIcon from "@mui/icons-material/Mail";
-import useAnnouncements from "../Hooks/useAnnouncements";
-import useAdmin from "../Hooks/useAdmin";
-import useUserBadge from "../Hooks/useUserBadge";
+import NavItem from "../Shared/NavItem";
 import Swal from "sweetalert2";
+import { useAuth } from "../Hooks/useAuth";
+import useUserBadge from "../Hooks/useUserBadge";
+import useAdmin from "../Hooks/useAdmin";
+import useAnnouncements from "../Hooks/useAnnouncements";
+import { FaUserAlt } from "react-icons/fa";
+import { MdOutlineMessage } from "react-icons/md";
 
 const NavBar = () => {
   const { user, signoutUser } = useAuth();
   const [isAdmin] = useAdmin();
   const [isUserBadge, isUserBadgeLoading] = useUserBadge();
-  // console.log("isUserBadge", isUserBadge);
-  // console.log("isAdmin", isAdmin);
-  const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
-
   const [announcementsData] = useAnnouncements();
-
-  // search bar state management
-  // const [search, setSearch] = useState("");
-  // const handleSearch = () => {
-  //   console.log(search.label);
-  // };
-
-  // navbar menu state management
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  // user menu state management
-
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
 
   // logout function
   const handleLogout = () => {
@@ -86,258 +31,63 @@ const NavBar = () => {
         // console.log("signout user error", err.message);
       });
   };
-
-  // console.log(new Date().toLocaleDateString());
-
   return (
-    <>
-      <AppBar position="static">
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
+    <div className="bg-opacity-50 backdrop-filter backdrop-blur-lg fixed top-0 w-full bg-white">
+      <div className="navbar max-w-7xl mx-auto">
+        <div className="flex-1">
+          <div className="flex gap-3  items-center mr-4">
             <img
-              style={{
-                height: "3rem",
-                borderRadius: "50%",
-                marginRight: ".5rem",
-              }}
+              className="md:h-12 h-8 w-auto rounded-full "
               src="https://i.ibb.co/sVkbSW9/React-Hub-Logo.png"
+              alt="logo"
             />
-            <Link to={"/"} style={{ textDecoration: "none", color: "white" }}>
-              <Typography
-                variant="h6"
-                noWrap
-                // component="a" // this is for link
-                sx={{
-                  mr: 2,
-                  display: { xs: "none", md: "flex" },
-                  fontFamily: "monospace",
-                  fontWeight: 700,
-                  letterSpacing: ".3rem",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                ReactHub
-              </Typography>
-            </Link>
+          </div>
+          <div className="flex gap-5">
+            <NavItem itemName={"Home"} pathName={"/"} />
+            <NavItem itemName={"Membership"} pathName={"/membership"} />
+            {user && (
+              <div className="flex relative">
+                <MdOutlineMessage className="text-3xl" />
+                <p className="badge absolute left-5 -top-1">
+                  {user && announcementsData?.length > 0 ? announcementsData?.length : 0}
+                </p>
+              </div>
+            )}
 
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", md: "none" },
-                }}
-              >
-                {/* {pages.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                ))} */}
-                {/* 
-                <MenuItem  onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center"> Home </Typography>
-                </MenuItem> */}
-                <NavItemMobile
-                  itemName={"Home"}
-                  pathName={"/"}
-                  handleCloseNavMenu={handleCloseNavMenu}
-                />
-
-                <NavItemMobile
-                  itemName={"Membership"}
-                  pathName={"/membership"}
-                  handleCloseNavMenu={handleCloseNavMenu}
-                />
-
+            {user ? "" : <NavItem itemName={"Join Us"} pathName={"/login"} />}
+          </div>
+        </div>
+        <div className="flex-none gap-2">
+          <div className="dropdown dropdown-end">
+            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+              <div className="">
                 {user ? (
-                  ""
+                  <img className="rounded-full h-12 w-auto" src={user?.photoURL} alt="" />
                 ) : (
-                  <NavItemMobile
-                    itemName={"Join Us"}
-                    pathName={"/login"}
-                    handleCloseNavMenu={handleCloseNavMenu}
-                  />
+                  <FaUserAlt className="text-3xl" title="Please Login!" />
                 )}
-
-                {/* <SearchBox handleSearch={handleSearch} setSearch={setSearch} /> */}
-              </Menu>
-            </Box>
-            {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".1rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              ReactHub
-            </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {/* // pages for big device */}
-
-              <NavItem
-                itemName={"Home"}
-                pathName={"/"}
-                handleCloseNavMenu={handleCloseNavMenu}
-              />
-
-              <NavItem
-                itemName={"Membership"}
-                pathName={"/membership"}
-                handleCloseNavMenu={handleCloseNavMenu}
-              />
-
-              {/* Icon Here */}
-              {/* Badge count will be dinamic  */}
-              <Button>
-                <Badge
-                  badgeContent={
-                    announcementsData?.length > 0
-                      ? announcementsData?.length
-                      : 0
-                  }
-                  color="primary"
-                >
-                  <MailIcon sx={{ color: "white" }} color="action" />
-                </Badge>
-              </Button>
-
-              {/* Hide on User Available */}
-              {user ? (
-                ""
-              ) : (
-                <NavItem
-                  itemName={"Join Us"}
-                  pathName={"/login"}
-                  handleCloseNavMenu={handleCloseNavMenu}
-                />
-              )}
-
-              {/* Search Box */}
-
-              {/* <SearchBox handleSearch={handleSearch} setSearch={setSearch} /> */}
-            </Box>
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip
-                title={user ? "Open settings" : "Login To Open Settings"}
+              </div>
+            </div>
+            {user && (
+              <ul
+                tabIndex={0}
+                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
               >
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  {/* have to replace with user icon */}
-                  {user ? (
-                    <img
-                      style={{
-                        borderRadius: "50%",
-                        height: "3rem",
-                        width: "3rem",
-                      }}
-                      src={user?.photoURL}
-                      alt=""
-                    />
-                  ) : (
-                    <AccountCircleIcon
-                      style={{ fontSize: "3rem", color: "black" }}
-                    />
-                  )}
-                </IconButton>
-              </Tooltip>
-
-              {user ? (
-                <Menu
-                  sx={{ mt: "45px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  {/* {settings.map((setting) => (
-    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-      <Typography textAlign="center">{setting}</Typography>
-    </MenuItem>
-  ))} */}
-
-                  {user ? (
-                    <MenuItem>
-                      <Typography textAlign="center">
-                        {user?.displayName}
-                      </Typography>
-                    </MenuItem>
-                  ) : (
-                    ""
-                  )}
-
-                  {user ? (
-                    <IconMenuItem
-                      itemName={"Dashboard"}
-                      pathName={"/dashboard"}
-                      handleCloseUserMenu={handleCloseUserMenu}
-                    />
-                  ) : (
-                    ""
-                  )}
-
-                  {/*  Onclik logout and display when user available */}
-                  {user ? (
-                    <MenuItem>
-                      <Button
-                        style={{ backgroundColor: "#1976d2" }}
-                        onClick={handleLogout}
-                        sx={{ color: "white" }}
-                      >
-                        LogOut
-                      </Button>
-                    </MenuItem>
-                  ) : (
-                    ""
-                  )}
-                </Menu>
-              ) : (
-                ""
-              )}
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </>
+                <li>
+                  <p className="">{user?.displayName}</p>
+                </li>
+                <li>
+                  <NavItem itemName={"Dashboard"} pathName={"/dashboard"} />
+                </li>
+                <li>
+                  <p onClick={handleLogout}>Logout</p>
+                </li>
+              </ul>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

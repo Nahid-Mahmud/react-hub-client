@@ -11,7 +11,7 @@ const MainLayout = () => {
   return (
     <div>
       <NavBar />
-      <div className="min-h-[calc(100vh-170.5px)]">
+      <div className="min-h-[calc(100vh-170.5px)] mt-[66px]">
         {navigation.state === "loading" ? <Loader /> : <Outlet />}
       </div>
       <Footer />
