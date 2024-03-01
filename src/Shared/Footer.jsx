@@ -1,30 +1,12 @@
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import { Box } from "@mui/material";
-
-
 const Footer = () => {
   return (
-    <Box
-      sx={{
-        backgroundColor: "primary.main",
-        height: "100px",
-      }}
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-      }}
-      component="footer"
-    >
-      <Container maxWidth="sm">
-        <Typography variant="body2" sx={{ color: "white" }} align="center">
-          {"Copyright © "}
-          React Hub 2023
-        </Typography>
-      </Container>
-    </Box>
+    <>
+      <footer className="footer footer-center p-4 bg-base-300 text-base-content">
+        <aside>
+          <p>Copyright © {new Date().getFullYear()} - All right reserved by ReactHub.</p>
+        </aside>
+      </footer>
+    </>
   );
 };
 
