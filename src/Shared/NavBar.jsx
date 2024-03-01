@@ -1,16 +1,12 @@
 import NavItem from "../Shared/NavItem";
 import Swal from "sweetalert2";
 import { useAuth } from "../Hooks/useAuth";
-import useUserBadge from "../Hooks/useUserBadge";
-import useAdmin from "../Hooks/useAdmin";
 import useAnnouncements from "../Hooks/useAnnouncements";
 import { FaUserAlt } from "react-icons/fa";
 import { MdOutlineMessage } from "react-icons/md";
 
 const NavBar = () => {
   const { user, signoutUser } = useAuth();
-  const [isAdmin] = useAdmin();
-  const [isUserBadge, isUserBadgeLoading] = useUserBadge();
   const [announcementsData] = useAnnouncements();
 
   // logout function
