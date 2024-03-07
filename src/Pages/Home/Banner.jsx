@@ -24,17 +24,15 @@ const Banner = ({ handleSearch, setSearch }) => {
       <div className="hero-overlay bg-opacity-60"></div>
       <div className="hero-content text-center text-neutral-content">
         <div className="max-w-2xl">
-          <h1 className="mb-5 text-5xl font-bold">
+          <h1 className="mb-5 text-5xl font-bold ">
             Inspiring Reactivity,
             <br />
             Inspiring You.
           </h1>
-          <p className="mb-5">
-            Welcome to ReactHub, where conversations come to life! Engage with
-            like-minded individuals, share ideas, and explore the vibrant world
-            of React development. Join our community and stay at the forefront
-            of React technologies. Let's code, discuss, and grow together at
-            ReactHub – your central hub for all things React!
+          <p className="mb-5 text-justify">
+            Welcome to ReactHub, where conversations come to life! Engage with like-minded individuals, share ideas, and
+            explore the vibrant world of React development. Join our community and stay at the forefront of React
+            technologies. Let's code, discuss, and grow together at ReactHub – your central hub for all things React!
           </p>
           <div className="flex items-center justify-center">
             <input
@@ -43,10 +41,7 @@ const Banner = ({ handleSearch, setSearch }) => {
               placeholder="Type here"
               className="input rounded-r-none text-black  w-full max-w-xs"
             />
-            <button
-              onClick={handleSearch}
-              className="md:p-[0.75rem] min-h-[3rem] bg-blue-600 rounded-r-lg "
-            >
+            <button onClick={handleSearch} className="md:p-[0.75rem] min-h-[3rem] bg-blue-600 rounded-r-lg ">
               Search
             </button>
           </div>
@@ -58,11 +53,7 @@ const Banner = ({ handleSearch, setSearch }) => {
               <span>
                 {" "}
                 {tags.map((tag, index) => (
-                  <span
-                    onClick={() => setSearch(tag.tag)}
-                    className="text-xl cursor-pointer"
-                    key={index}
-                  >
+                  <span onClick={() => setSearch(tag.tag)} className="text-xl cursor-pointer" key={index}>
                     {" "}
                     #<span>{tag?.tag}</span>{" "}
                   </span>

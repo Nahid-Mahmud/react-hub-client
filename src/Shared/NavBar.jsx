@@ -40,7 +40,7 @@ const NavBar = () => {
           </div>
           <div className="flex gap-5">
             <NavItem itemName={"Home"} pathName={"/"} />
-            <NavItem itemName={"Membership"} pathName={"/membership"} />
+            {user && <NavItem itemName={"Membership"} pathName={"/membership"} />}
             {user && (
               <div className="flex relative">
                 <MdOutlineMessage className="text-3xl" />
@@ -73,7 +73,7 @@ const NavBar = () => {
                   <p className="">{user?.displayName}</p>
                 </li>
                 <li>
-                  <NavItem itemName={"Dashboard"} pathName={"/dashboard"} />
+                  <NavItem itemName={"Dashboard"} pathName={"/dashboard/adminprofile"} />
                 </li>
                 <li>
                   <p onClick={handleLogout}>Logout</p>
