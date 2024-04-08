@@ -58,16 +58,15 @@ const CheckoutForm = ({ badgeDataRefetch }) => {
     }
 
     // confirm payment method
-    const { paymentIntent, error: confirmError } =
-      await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: card,
-          billing_details: {
-            email: user?.email,
-            name: user?.displayName,
-          },
+    const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: {
+        card: card,
+        billing_details: {
+          email: user?.email,
+          name: user?.displayName,
         },
-      });
+      },
+    });
 
     if (confirmError) {
       // console.log("Confirm error", confirmError);
@@ -83,11 +82,11 @@ const CheckoutForm = ({ badgeDataRefetch }) => {
           .then((res) => {
             // console.log(res.data);
             if (res.data.modifiedCount > 0) {
-                badgeDataRefetch();
+              badgeDataRefetch();
             }
           });
         // refetch user data for badge update
-      
+
         // show alert
         Swal.fire({
           position: "top-end",
@@ -104,12 +103,10 @@ const CheckoutForm = ({ badgeDataRefetch }) => {
 
   return (
     <div>
-      <form
-        className="md:max-w-[50vw] lg:max-w-[30vw] max-w-[95vw] mx-auto"
-        onSubmit={handleSubmit}
-      >
-        <p className="py-5 font-semibold">Enter Your card Details</p>
+      <form className="md:max-w-[50vw] lg:max-w-[30vw] border p-5 rounded-md max-w-[95vw] mx-auto" onSubmit={handleSubmit}>
+        <p className="py-5 font-semibold">Enter Your card Details :</p>
         <CardElement
+          className="p-5 border rounded"
           options={{
             style: {
               base: {
@@ -126,11 +123,11 @@ const CheckoutForm = ({ badgeDataRefetch }) => {
           }}
         />
         <button
-          className="btn btn-primary my-5"
+          className="btn capitalize bg-green-500 font-bold text-xl   my-5"
           type="submit"
           disabled={!stripe || !clientSecret}
         >
-          Pay
+          Become a member
         </button>
         <p className="text-red-500">{payError.message}</p>
         <p className="text-green-500"></p>

@@ -4,6 +4,7 @@ import { useAuth } from "../Hooks/useAuth";
 import useAnnouncements from "../Hooks/useAnnouncements";
 import { FaUserAlt } from "react-icons/fa";
 import { MdOutlineMessage } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const { user, signoutUser } = useAuth();
@@ -32,11 +33,13 @@ const NavBar = () => {
       <div className="navbar max-w-7xl mx-auto">
         <div className="flex-1">
           <div className="flex gap-3  items-center mr-4">
-            <img
-              className="md:h-12 h-8 w-auto rounded-full "
-              src="https://i.ibb.co/sVkbSW9/React-Hub-Logo.png"
-              alt="logo"
-            />
+            <Link to={"/"}>
+              <img
+                className="md:h-12 h-8 w-auto rounded-full "
+                src="https://i.ibb.co/sVkbSW9/React-Hub-Logo.png"
+                alt="logo"
+              />
+            </Link>
           </div>
           <div className="flex gap-5">
             <NavItem itemName={"Home"} pathName={"/"} />
