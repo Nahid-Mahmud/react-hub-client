@@ -28,7 +28,7 @@ const NavBar = () => {
       });
   };
   return (
-    <div className="bg-opacity-50 backdrop-filter backdrop-blur-lg fixed top-0 w-full bg-white">
+    <div className="bg-opacity-50 backdrop-filter z-50 backdrop-blur-lg fixed top-0 w-full bg-white">
       <div className="navbar max-w-7xl mx-auto">
         <div className="flex-1">
           <div className="flex gap-3  items-center mr-4">
@@ -73,7 +73,7 @@ const NavBar = () => {
                   <p className="">{user?.displayName}</p>
                 </li>
                 <li>
-                  <NavItem itemName={"Dashboard"} pathName={"/dashboard/adminprofile"} />
+                  <NavItem itemName={"Dashboard"} pathName={"/dashboard"} />
                 </li>
                 <li>
                   <p onClick={handleLogout}>Logout</p>
