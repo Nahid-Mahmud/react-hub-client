@@ -27,9 +27,7 @@ const AllPostCard = ({ post }) => {
   });
   //   console.log(allCommentsData);
 
-  const totalComments = allCommentsData.filter(
-    (comment) => comment.postId === _id
-  );
+  const totalComments = allCommentsData.filter((comment) => comment.postId === _id);
   //   console.log(totalComments);
 
   // const totalVotes = upVoteCount + downVoteCount;
@@ -38,9 +36,12 @@ const AllPostCard = ({ post }) => {
   };
 
   return (
-    <div onClick={handlePostClick} className="cursor-pointer">
-      <div className="space-y-2 shadow-lg  p-5 ">
-        <div className="flex  items-center gap-2">
+    <div
+      onClick={handlePostClick}
+      className="cursor-pointer border hover:scale-110 transition-transform duration-300 transform dark:bg-[#0b1222] rounded-md"
+    >
+      <div className="space-y-2   p-5 ">
+        <div className="flex  items-center gap-2 border rounded-xl p-2 pb-2">
           <div className="avatar">
             <div className="w-12 rounded-full">
               <img src={authorPicture} />
@@ -52,9 +53,7 @@ const AllPostCard = ({ post }) => {
           <p className="text-lg max-w-[24rem] font-medium">{postTitle}</p>
           <p>#{tags}</p>
           <p> Publish Date : {time} </p>
-          <p>
-            Total Comments: {totalComments?.length ? totalComments.length : 0}
-          </p>
+          <p>Total Comments: {totalComments?.length ? totalComments.length : 0}</p>
           <div>
             <p> Total UpVote :{upVoteCount} </p>
             <p> Total DownVote {downVoteCount} </p>

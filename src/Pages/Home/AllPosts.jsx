@@ -40,22 +40,16 @@ const AllPosts = ({ search, setSearch }) => {
   };
 
   useEffect(() => {
-    axiosPublic
-      .get(`/posts?sort=${sort}&page=${currentPage}&search=${search}`)
-      .then((res) => {
-        setPostsData(res.data);
-      });
+    axiosPublic.get(`/posts?sort=${sort}&page=${currentPage}&search=${search}`).then((res) => {
+      setPostsData(res.data);
+    });
   }, [axiosPublic, sort, currentPage, search]);
 
   return (
     <div className="max-w-[90rem] pb-10 mx-auto">
-      <p className="text-center font-bold text-3xl mb-10 underline">
-        All Posts
-      </p>
+      <p className="text-center font-bold text-3xl mb-10 underline">All Posts</p>
       <div onClick={handleSortByPopularity} className="text-center mb-5 ">
-        <button className="btn hover:bg-blue-900 bg-blue-600 text-white">
-          Sort By Popularity
-        </button>
+        <button className="btn hover:bg-blue-900 bg-blue-600 text-white">Sort By Popularity</button>
       </div>
       <div className="grid max-w-[95vw] mx-auto mb-10  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {postsData.map((post, index) => (
@@ -66,12 +60,8 @@ const AllPosts = ({ search, setSearch }) => {
       <div className="text-center space-x-2">
         {/* Previous button */}
         <button
-          className="btn"
-          onClick={() =>
-            currentPage > 0
-              ? setCurrentPage(currentPage - 1)
-              : setCurrentPage(currentPage)
-          }
+          className="btn dark:bg-[#0b1222] dark:text-slate-300 dark:hover:bg-blue-700"
+          onClick={() => (currentPage > 0 ? setCurrentPage(currentPage - 1) : setCurrentPage(currentPage))}
         >
           Previous
         </button>
@@ -79,12 +69,14 @@ const AllPosts = ({ search, setSearch }) => {
           return (
             <button
               className={` btn ${
-                currentPage === pageNumber ? "bg-[#ff4e59]" : ""
+                currentPage === pageNumber
+                  ? "bg-[#ff4e59]"
+                  : "dark:bg-[#0b1222] dark:text-slate-300 dark:hover:bg-[#ff4e59]"
               } `}
               onClick={() => setCurrentPage(pageNumber)}
               key={index}
             >
-              {pageNumber +1}
+              {pageNumber + 1}
             </button>
           );
         })}
@@ -92,11 +84,9 @@ const AllPosts = ({ search, setSearch }) => {
 
         <button
           onClick={() =>
-            currentPage < numberOfpages - 1
-              ? setCurrentPage(currentPage + 1)
-              : setCurrentPage(currentPage)
+            currentPage < numberOfpages - 1 ? setCurrentPage(currentPage + 1) : setCurrentPage(currentPage)
           }
-          className="btn"
+          className="btn dark:bg-[#0b1222] dark:text-slate-300 dark:hover:bg-blue-700"
         >
           Next
         </button>

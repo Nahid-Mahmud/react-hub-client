@@ -9,7 +9,7 @@ import Loader from "../Shared/Loader";
 const MainLayout = () => {
   const navigation = useNavigation();
   return (
-    <div>
+    <div className="dark:bg-blue-950 dark:text-slate-300">
       <NavBar />
       <div className="min-h-[calc(100vh-170.5px)] mt-[66px]">
         {navigation.state === "loading" ? <Loader /> : <Outlet />}

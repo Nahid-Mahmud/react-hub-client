@@ -63,7 +63,7 @@ const NavBar = () => {
               />
             </Link>
           </div>
-          <div className="flex gap-5">
+          <div className="flex gap-2 md:gap-5">
             <NavItem itemName={"Home"} pathName={"/"} />
             {user && <NavItem itemName={"Membership"} pathName={"/membership"} />}
             {user && (
