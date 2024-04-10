@@ -2,14 +2,36 @@ import NavItem from "../Shared/NavItem";
 import Swal from "sweetalert2";
 import { useAuth } from "../Hooks/useAuth";
 import useAnnouncements from "../Hooks/useAnnouncements";
-import { FaUserAlt } from "react-icons/fa";
+import { FaMoon, FaUserAlt } from "react-icons/fa";
 import { MdOutlineMessage } from "react-icons/md";
 import { Link } from "react-router-dom";
+import ToggleButton from "./ToggleButton";
+import { useEffect, useState } from "react";
+import { getThemeFromLocalStoragae } from "../Hooks/getThemeFromLocalStorage";
+import { FaSun } from "react-icons/fa";
 
 const NavBar = () => {
   const { user, signoutUser } = useAuth();
   const [announcementsData] = useAnnouncements();
+  const themeData = getThemeFromLocalStoragae();
+  const [isDarkMode, setIsDarkMode] = useState(themeData);
 
+  const themeSwitcher = () => {
+    setIsDarkMode((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
+  // useEffect to dom manupulation
+
+  useEffect(() => {
+    if (isDarkMode === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("_theme", isDarkMode);
+  }, [isDarkMode]);
+
+  console.log(isDarkMode);
   // logout function
   const handleLogout = () => {
     // console.log("logout");
@@ -29,7 +51,7 @@ const NavBar = () => {
       });
   };
   return (
-    <div className="bg-opacity-50 backdrop-filter z-50 backdrop-blur-lg fixed top-0 w-full bg-white">
+    <div className="bg-opacity-50 backdrop-filter z-50 backdrop-blur-lg fixed top-0 w-full bg-white dark:bg-[#0b1222] dark:text-white">
       <div className="navbar max-w-7xl mx-auto">
         <div className="flex-1">
           <div className="flex gap-3  items-center mr-4">
@@ -56,7 +78,16 @@ const NavBar = () => {
             {user ? "" : <NavItem itemName={"Join Us"} pathName={"/login"} />}
           </div>
         </div>
-        <div className="flex-none gap-2">
+        <div className="flex-none gap-4">
+          {/* <ToggleButton /> */}
+          {isDarkMode === "dark" ? (
+            <FaSun onClick={themeSwitcher} className="text-3xl cursor-pointer" />
+          ) : (
+            <FaMoon onClick={themeSwitcher} className="text-2xl cursor-pointer" />
+          )}
+
+          {/* toggle button ends */}
+
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
               <div className="">
@@ -70,7 +101,7 @@ const NavBar = () => {
             {user && (
               <ul
                 tabIndex={0}
-                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 dark:bg-blue-950 dark:text-white"
               >
                 <li>
                   <p className="">{user?.displayName}</p>

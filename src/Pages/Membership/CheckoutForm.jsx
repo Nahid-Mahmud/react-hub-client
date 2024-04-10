@@ -103,7 +103,10 @@ const CheckoutForm = ({ badgeDataRefetch }) => {
 
   return (
     <div>
-      <form className="md:max-w-[50vw] lg:max-w-[30vw] border p-5 rounded-md max-w-[95vw] mx-auto" onSubmit={handleSubmit}>
+      <form
+        className="md:max-w-[50vw] lg:max-w-[30vw] border p-5 rounded-md max-w-[95vw] mx-auto"
+        onSubmit={handleSubmit}
+      >
         <p className="py-5 font-semibold">Enter Your card Details :</p>
         <CardElement
           className="p-5 border rounded"
@@ -122,8 +125,9 @@ const CheckoutForm = ({ badgeDataRefetch }) => {
             },
           }}
         />
+
         <button
-          className="btn capitalize bg-green-500 font-bold text-xl   my-5"
+          className="relative  mt-5 py-2 px-8 text-black text-base font-bold nded-full overflow-hidden bg-slate-200 rounded-full transition-all duration-400 ease-in-out shadow-md hover:scale-105 hover:text-white hover:shadow-lg active:scale-90 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-blue-500 before:to-blue-300 before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-full hover:before:left-0"
           type="submit"
           disabled={!stripe || !clientSecret}
         >
