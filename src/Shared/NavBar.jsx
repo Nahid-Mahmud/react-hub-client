@@ -51,7 +51,7 @@ const NavBar = () => {
       });
   };
   return (
-    <div className="bg-opacity-50 backdrop-filter z-50 backdrop-blur-lg fixed top-0 w-full bg-white dark:bg-[#0b1222] dark:text-white">
+    <div className="bg-opacity-50 backdrop-filter z-50 backdrop-blur-lg fixed top-0 w-full bg-white dark:bg-[#0b1222] dark:text-white drop-shadow-md ">
       <div className="navbar max-w-7xl mx-auto">
         <div className="flex-1">
           <div className="flex gap-3  items-center mr-4">
@@ -62,10 +62,11 @@ const NavBar = () => {
                 alt="logo"
               />
             </Link>
+            <Link to={"/"}>
+              <p className="text-2xl font-semibold hidden md:inline-block">ReactHub</p>
+            </Link>
           </div>
           <div className="flex gap-2 md:gap-5">
-            <NavItem itemName={"Home"} pathName={"/"} />
-            {user && <NavItem itemName={"Membership"} pathName={"/membership"} />}
             {user && (
               <div className="flex relative">
                 <MdOutlineMessage className="text-3xl" />
@@ -79,6 +80,8 @@ const NavBar = () => {
           </div>
         </div>
         <div className="flex-none gap-4">
+          <NavItem itemName={"Home"} pathName={"/"} />
+          {user && <NavItem itemName={"Membership"} pathName={"/membership"} />}
           {/* <ToggleButton /> */}
           {isDarkMode === "dark" ? (
             <FaSun onClick={themeSwitcher} className="text-3xl cursor-pointer" />

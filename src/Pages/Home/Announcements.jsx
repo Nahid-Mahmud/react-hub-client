@@ -18,9 +18,9 @@ const Announcements = () => {
       <div className="grid max-w-[95vw] mx-auto mb-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {announcementsData.length > 0 &&
           announcementsData.map((item, index) => (
-            <div className="hover:scale-110 transition-transform" key={index}>
+            <div className="hover:scale-110 transition-transform border" key={index}>
               <div className="space-y-2 shadow-lg  p-5 rounded-md dark:bg-[#0b1222]">
-                <div className="flex  items-center gap-2">
+                <div className="flex border p-2 rounded-md items-center gap-2">
                   <div className="avatar">
                     <div className="w-12 rounded-full">
                       <img src={item?.authorImage} />

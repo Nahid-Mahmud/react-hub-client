@@ -123,10 +123,10 @@ const PostDeatil = () => {
   };
 
   return (
-    <div className=" min-h-[50vh] md:max-w-[95vw] max-w-[95vw] mx-auto flex flex-col py-10 items-center justify-center">
-      <div className="space-y-2  shadow-lg   p-5 ">
-        <div className="flex  items-center gap-2">
-          <div className="avatar">
+    <div className="md:min-h-[87.7vh] min-h-[50vh] md:max-w-[95vw] max-w-[95vw] mx-auto flex flex-col py-10 items-center justify-center">
+      <div className="space-y-2 shadow-lg p-5 border dark:border dark:bg-[#0b1222] rounded-md">
+        <div className="flex  items-center gap-2 border p-2 rounded-md">
+          <div className="avatar ">
             <div className="w-12 rounded-full">
               <img src={authorPicture} />
             </div>
@@ -138,7 +138,7 @@ const PostDeatil = () => {
         </div>
         <div className="space-y-3">
           <p className="text-lg max-w-[24rem] font-medium">{postTitle}</p>
-          <p className="lg:max-w-[50vw]  ">{description}</p>
+          <p className="lg:max-w-[30vw]  ">{description}</p>
           <p> # {tags} </p>
           <p className="text-sm">Click on arrows to vote this post</p>
           <div className="flex flex-col md:flex-row gap-5">
@@ -150,8 +150,7 @@ const PostDeatil = () => {
               </div>
             </div>
             <div className="flex gap-2 items-center  ">
-              Total DownVote:{" "}
-              <span className="font-bold"> {downVoteCount} </span>
+              Total DownVote: <span className="font-bold"> {downVoteCount} </span>
               {downVoteDifference ? `+${downVoteDifference}` : ""}
               <div onClick={handleDownvote}>
                 <FaArrowDown className="text-xl cursor-pointer" />
@@ -166,27 +165,26 @@ const PostDeatil = () => {
               name="comment"
               required
               placeholder="Commet Here"
-              className="textarea textarea-bordered textarea-lg w-full max-w-xs"
+              className="textarea textarea-bordered textarea-lg w-full max-w-xs dark:bg-blue-950"
             ></textarea>
           </div>
           {!user ? (
-            <p className="text-xl text-red-500 my-3">
-              {" "}
-              User Must Login to comment.{" "}
-            </p>
+            <p className="text-xl text-red-500 my-3"> User Must Login to comment. </p>
           ) : (
-            <input
-              type="submit"
-              value="Post Comment"
-              className="btn btn-xs sm:btn-sm md:btn-md mt-5 bg-blue-600 text-white h-[3rem] hover:bg-blue-800 hover:text-white lg:btn-lg"
-            />
+            <div>
+              <input
+                type="submit"
+                value="Post Comment"
+                className="btn btn-xs sm:btn-sm md:btn-md mt-5 bg-blue-600 text-white h-[3rem] hover:bg-blue-800 hover:text-white lg:btn-lg"
+              />
+            </div>
           )}
         </form>
-        <div className=" flex flex-col shadow-md w-fit md:mx-auto p-5  items-center">
+        <div className=" flex flex-col shadow-md dark:bg-blue-950 rounded-md w-fit md:mx-auto p-5  items-center">
           <FacebookShareButton url={shareUrl} hashtag={`#${tags}`}>
             <FacebookIcon size={42} round={true} />
           </FacebookShareButton>
-          <p>Facebook Share</p>
+          <p> Share To Facebook </p>
         </div>
       </div>
     </div>
