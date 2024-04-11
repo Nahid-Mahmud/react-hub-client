@@ -23,7 +23,7 @@ const Membership = () => {
             Become a member and take your conversations to another level!
           </p>
           <div  className="flex underline mb-5 flex-col   items-center">
-            <div className="card w-96 bg-base-100 ">
+            <div className="card w-96 bg-base-100 dark:bg-[#0b1222] ">
               <div className="card-body">
                 <h2 className="card-title">
                   One time Payment! ($5 only) <span className="text-red-500 text-xl">*</span>{" "}

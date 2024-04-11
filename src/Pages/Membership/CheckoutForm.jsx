@@ -109,7 +109,7 @@ const CheckoutForm = ({ badgeDataRefetch }) => {
       >
         <p className="py-5 font-semibold">Enter Your card Details :</p>
         <CardElement
-          className="p-5 border rounded"
+          className="p-5 border rounded dark:bg-[#0b1222] dark:text-slate-300 bg-base-100 w-full"
           options={{
             style: {
               base: {
