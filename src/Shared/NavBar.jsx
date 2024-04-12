@@ -73,12 +73,11 @@ const NavBar = () => {
                 </p>
               </div>
             )}
-
-            {user ? "" : <NavItem itemName={"Join Us"} pathName={"/login"} />}
           </div>
         </div>
         <div className="flex-none gap-4">
           <NavItem itemName={"Home"} pathName={"/"} />
+          {user ? "" : <NavItem itemName={"Sign In"} pathName={"/login"} />}
           {user && <NavItem itemName={"Membership"} pathName={"/membership"} />}
           {/* <ToggleButton /> */}
           {isDarkMode === "dark" ? (
@@ -91,13 +90,7 @@ const NavBar = () => {
 
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-              <div className="">
-                {user ? (
-                  <img className="rounded-full h-12 w-auto" src={user?.photoURL} alt="" />
-                ) : (
-                  <FaUserAlt className="text-3xl" title="Please Login!" />
-                )}
-              </div>
+              <div className="">{user && <img className="rounded-full h-12 w-auto" src={user?.photoURL} alt="" />}</div>
             </div>
             {user && (
               <ul
