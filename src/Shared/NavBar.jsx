@@ -89,9 +89,13 @@ const NavBar = () => {
           {/* toggle button ends */}
 
           <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-              <div className="">{user && <img className="rounded-full h-12 w-auto" src={user?.photoURL} alt="" />}</div>
-            </div>
+            {user && (
+              <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                <div className="">
+                  {user && <img className="rounded-full h-12 w-auto" src={user?.photoURL} alt="" />}
+                </div>
+              </div>
+            )}
             {user && (
               <ul
                 tabIndex={0}
