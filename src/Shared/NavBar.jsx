@@ -30,8 +30,6 @@ const NavBar = () => {
     }
     localStorage.setItem("_theme", isDarkMode);
   }, [isDarkMode]);
-
-  console.log(isDarkMode);
   // logout function
   const handleLogout = () => {
     // console.log("logout");
