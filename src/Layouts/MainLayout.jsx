@@ -41,7 +41,7 @@ const MainLayout = () => {
   ) : (
     <div className="dark:bg-[#0f172a] dark:text-slate-300">
       <NavBar />
-      <div className="min-h-[calc(100vh-170.5px)] mt-[66px]">
+      <div className="min-h-[calc(100vh-170.5px)] mt-16">
         {navigation.state === "loading" ? ( // If loading or navigation is in progress, display the preloader
           <Loader />
         ) : (
