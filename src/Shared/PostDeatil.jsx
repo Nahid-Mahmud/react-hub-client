@@ -163,7 +163,8 @@ const PostDeatil = () => {
             <label className="text-xl font-medium"> Leave a Comment! </label>
             <textarea
               name="comment"
-              required
+              disabled={user ? false : true}
+              required={true}
               placeholder="Commet Here"
               className="textarea textarea-bordered textarea-lg w-full max-w-xs dark:bg-blue-950"
             ></textarea>
