@@ -17,6 +17,7 @@ import PostRelatedCommentDashboard from "../Pages/DashboardPages/MyPosts/PostRel
 import AdminRoute from "../PrivateRoute/AdminRoute";
 import WelcomePage from "../Pages/DashboardPages/WelcomePage/WelcomePage";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import { singlePostLoader } from "../loaders/postLoader";
 
 const router = createBrowserRouter([
   {
@@ -34,8 +35,8 @@ const router = createBrowserRouter([
       {
         path: "post/:id",
         element: <PostDeatil />,
-        loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_baseUrl}/posts/${params.id}`),
+        // loader: ({ params }) => fetch(`${import.meta.env.VITE_baseUrl}/posts/${params.id}`),
+        loader: singlePostLoader,
       },
     ],
   },
@@ -83,8 +84,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         path: `post/dashboard/:id`,
-        loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_baseUrl}/posts/${params.id}`),
+        loader: singlePostLoader,
       },
       // admin routes
       {
