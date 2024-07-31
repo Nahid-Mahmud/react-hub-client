@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 // import React, { useState } from "react";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import BannerImage from "../../../src/images/banner.jpg";
 
 // eslint-disable-next-line react/prop-types
 const Banner = ({ handleSearch, setSearch }) => {
@@ -18,7 +19,7 @@ const Banner = ({ handleSearch, setSearch }) => {
     <div
       className="hero min-h-[80vh]"
       style={{
-        backgroundImage: "url(https://i.ibb.co/MpcC28x/banner.jpg)",
+        backgroundImage: `url(${BannerImage})`,
       }}
     >
       <div className="hero-overlay bg-opacity-60 dark:bg-opacity-30"></div>
